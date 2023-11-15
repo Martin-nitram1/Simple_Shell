@@ -1,5 +1,6 @@
 #include "shell.h"
 
+static char buf[WRITE_BUF_SIZE];
 /**
  * _strcpy - copy string
  * @dest: destinatin
@@ -70,8 +71,6 @@ void _puts(char *str)
 int _putchar(char c)
 {
 	static int iq;
-
-	static char buf(WRITE_BUF_SIZE);
 
 	if (c == BUF_FLUSH || iq >= WRITE_BUF_SIZE)
 	{
