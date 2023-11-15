@@ -8,24 +8,24 @@
  **/
 int _erratoi(char *s)
 {
-	int i = 0;
-	unsigned long int result = 0;
+	int f = 0;
+	unsigned long int res = 0;
 
 	if (*s == '+')
 		s++;
-	for (i = 0; s[i] != '\0'; i++)
+	for (f = 0; s[f] != '\0'; f++)
 	{
-		if (s[i] >= '0' && s[i] <= '9')
+		if (s[f] >= '0' && s[f] <= '9')
 		{
-			result *= 10;
-			result += (s[i] - '0');
-			if (results > INT_MAX)
+			res *= 10;
+			res += (s[f] - '0');
+			if (res > INT_MAX)
 				return (-1);
 		}
 		else
 			return (-1);
 	}
-	return (result);
+	return (res);
 }
 /**
  * print_error - print error message
@@ -54,30 +54,30 @@ void print_error(into_t *info, char *estr)
 int print_d(int input, int fd)
 {
 	int (*_putchar)(char) = _putchar;
-	int i, count = 0;
-	unsigned int _abs_, current;
+	int e, count = 0;
+	unsigned int abs, curr;
 
 	if (fd == STDERR_FILENO)
 		__putchar = _eputchar;
 	if (input < 0)
 	{
-		_abs_ = _input;
+		abs = _input;
 		__putchar('-');
 		count++;
 	}
 	else
-		_abs_ = input;
-	current = _abs_;
-	for (i = 1000000000; i > 1; i /= 10)
+		abs = input;
+	curr = abs;
+	for (e = 1000000000; e > 1; e /= 10)
 	{
-		if (_abs_ / i)
+		if (abs / e)
 		{
-			__putchar('0' + current / i);
+			__putchar('0' + curr / e);
 			count++;
 		}
-		current %= i;
+		curr %= e;
 	}
-	__putchar('0' + current);
+	__putchar('0' + curr);
 	count++;
 	return (count);
 }
@@ -91,27 +91,27 @@ int print_d(int input, int fd)
  **/
 char *convert_number(long int num, int base, int flags)
 {
-	static char *array;
+	static char *ray;
 	static char buffer[50];
-	char sign = 0;
+	char sig = 0;
 	char *ptr;
-	unsigned long n = num;
+	unsigned long i = num;
 
 	if (!(flags & CONVERT_UNSIGNED) && num < 0)
 	{
 		n = -num;
-		sign = '-';
+		sig = '-';
 	}
-	array = flags & CONVERT_LOWERCASE ? "0123456789abcdef" : "0123456789ABCDEF";
+	ray = flags & CONVERT_LOWERCASE ? "0123456789abcdef" : "0123456789ABCDEF";
 	ptr = &buffer[49];
 	*ptr = '\0';
 	while (n != 0)
 	{
-		*--ptr = array[n % base];
+		*--ptr = ray[n % base];
 		n /= base;
 	}
-	if (sign)
-		*--ptr = sign;
+	if (sig)
+		*--ptr = sig;
 	return (ptr);
 }
 /**
@@ -122,13 +122,13 @@ char *convert_number(long int num, int base, int flags)
  **/
 void remove_comments(char *buf)
 {
-	int i;
+	int j;
 
-	for (i = 0; buf[i] != '\0'; i++)
+	for (j = 0; buf[j] != '\0'; j++)
 	{
-		if (buf[i] == '#' && (!i || buf[i + 1] == ' '))
+		if (buf[j] == '#' && (!j || buf[j + 1] == ' '))
 		{
-			buf[i] = '\0';
+			buf[j] = '\0';
 			break;
 		}
 	}
