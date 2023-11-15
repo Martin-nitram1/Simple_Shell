@@ -1,6 +1,6 @@
 # The Gates of Shell
 
-![The Gates of SHell]https://s3.amazonaws.com/intranet-projects-files/holbertonschool-low_level_programming/235/shell.jpeg
+![The Gates of SHell](https://s3.amazonaws.com/intranet-projects-files/holbertonschool-low_level_programming/235/shell.jpeg)
 
 This is a simple project written in C that allows execution of simple commands such as cd, ls, echo, pwd etc.
 This project creates a simple shell program that can execute various Unix-like commands. 
