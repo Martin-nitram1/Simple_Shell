@@ -10,22 +10,22 @@
  **/
 char *_strncpy(char *dest, char *src, int n)
 {
-	int i, j;
+	int j, b;
 	char *s = dest;
 
-	i = 0;
-	while (src[i] != '\0' &&  i < n - 1)
+	j = 0;
+	while (src[j] != '\0' &&  j < n - 1)
 	{
-		dest[i] = src[i];
-		i++;
+		dest[j] = src[j];
+		j++;
 	}
-	if (i < n)
+	if (j < n)
 	{
-		j = i;
-		while (j < n)
+		b = j;
+		while (b < n)
 		{
-			dest[j] = '\0';
-			j++;
+			dest[b] = '\0';
+			b++;
 		}
 	}
 	return (s);
@@ -69,6 +69,6 @@ char *_strchr(char *s, char c)
 	do {
 		if (*s == c)
 			return (s);
-	} while (*ss++ != '\0');
+	} while (*s++ != '\0');
 	return (NULL);
 }
