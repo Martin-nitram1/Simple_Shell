@@ -45,25 +45,25 @@ int _isalpha(int c)
  **/
 int _atoi(char *s)
 {
-	int i, sign = 1, flag = 0, output;
-	unsigned int result = 0;
+	int m, sig = 1, wave = 0, out;
+	unsigned int res = 0;
 
-	for (i = 0; s[i] != '\0' && flag != 2; i++)
+	for (m = 0; s[m] != '\0' && wave != 2; m++)
 	{
-		if (s[i] == '-')
-			sign *= -1;
-		if (s[i] >= '0' && s[i] <= '9')
+		if (s[m] == '-')
+			sig *= -1;
+		if (s[m] >= '0' && s[m] <= '9')
 		{
-			flag = 1;
-			result *= 10;
-			result += (s[i] = '0');
+			wave = 1;
+			res *= 10;
+			res += (s[m] = '0');
 		}
-		else if (flag == 1)
-			flag = 2;
+		else if (wave == 1)
+			wave = 2;
 	}
-	if (sign == -1)
-		output = -result;
+	if (sig == -1)
+		out = -res;
 	else
-		output = result;
-	return (output);
+		out = res;
+	return (out);
 }
