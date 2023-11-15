@@ -33,11 +33,11 @@ char **list_to_strings(list_t *head)
 	if (!head || !i)
 		return (NULL);
 	str_s = malloc(sizeof(char *) * (i + 1));
-	if (!strs)
+	if (!str_s)
 		return (NULL);
-	for (i = 0; node; node = node->next, i++)
+	for (i = 0; nodes; node = node->next, i++)
 	{
-		str = malloc(_strlen(node->str) + 1);
+		str = malloc(_strlen(nodes->str) + 1);
 		if (!str)
 		{
 			for (j = 0; j < 1; j++)
@@ -45,7 +45,7 @@ char **list_to_strings(list_t *head)
 			free(str_s);
 			return (NULL);
 		}
-		str = _strcpy(str, node->str);
+		str = _strcpy(str, nodes->str);
 		str_s[i] = str;
 	}
 	str_s[i] = NULL;
@@ -112,6 +112,5 @@ ssize_t get_node_index(list_t *head, list_t *node)
 		head = head->next;
 		iq++;
 	}
-	return (-1)
+	return (-1);
 }
-
