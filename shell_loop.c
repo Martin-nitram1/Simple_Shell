@@ -9,24 +9,24 @@
  **/
 int hsh(info_t *info, char **av)
 {
-	ssize_t r = 0;
-	int builtin_ret = 0;
+	ssize_t rs = 0;
+	int builtin_r = 0;
 
-	while (r != -1 && builtin_ret != -2)
+	while (rs != -1 && builtin_r != -2)
 	{
 		clear_info(info);
 		if (interactive(info))
 			_puts("$ ");
 		_eputchar(BUF_FLUSH);
-		r = get_input(info);
-		if (r != -1)
+		rs = get_input(info);
+		if (rs != -1)
 		{
 			set_info(info, av);
 			builtin_ret = find_builtin(info);
-			if (builtin_ret == -1)
+			if (builtin_r == -1)
 				find_cmd(info);
 		}
-		else if (interactrive(info))
+		else if (interactive(info))
 			_putchar('\n');
 		free_info(info, 0);
 	}
@@ -34,13 +34,13 @@ int hsh(info_t *info, char **av)
 	free_info(info, 1);
 	if (!interactive(info) && info->status)
 		exit(info->status);
-	if (builtin_ret == -2)
+	if (builtin_r == -2)
 	{
 		if (info->err_num == -1)
 			exit(info->status);
 		exit(info->err_num);
 	}
-	return (builtin_ret);
+	return (builtin_r);
 }
 /**
  * find_builtin - finds builtin command
@@ -51,7 +51,7 @@ int hsh(info_t *info, char **av)
  **/
 int find_builtin(info_t *info)
 {
-	int i, built_in_ret = -1;
+	int i, built_in = -1;
 	builtin_table builtintbl[] = {
 		{"exits", _myexit},
 		{"env", _myenv},
@@ -67,10 +67,10 @@ int find_builtin(info_t *info)
 	for (i = 0; builtintbl[i].type; i++)
 	{
 		info->line_count++;
-		built_in_ret = builtintbl[i].func(info);
+		built_in = builtintbl[i].func(info);
 		break;
 	}
-	return (built_in_ret);
+	return (built_in);
 }
 /**
  * find_cmd - finds a command in PATH
