@@ -48,7 +48,7 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
  *
  * Return: bytes read
  **/
-ssize_t get_input(info_t info)
+ssize_t get_input(info_t *info)
 {
 	static char *bufs;
 	static size_t q, j, len;
@@ -56,7 +56,7 @@ ssize_t get_input(info_t info)
 	char *p;
 
 	_putchar(BUF_FLUSH);
-	s = input_buf(info, &bufs, &len);
+	s = input_buf(&info, &bufs, &len);
 	if (s == -1)
 		return (-1);
 	if (len)
@@ -66,7 +66,7 @@ ssize_t get_input(info_t info)
 		check_chain(info, bufs, &j, q, len);
 		while (j < len)
 		{
-			if (is_chain(info, bufs, &j))
+			if (is_chain(&info, bufs, &j))
 				break;
 			j++;
 		}
@@ -76,7 +76,7 @@ ssize_t get_input(info_t info)
 			q = len = 0;
 			info->cmd_buf_type = CMD_NORM;
 		}
-		*bufd = p;
+		*bufs = p;
 		return (_strlen(p));
 	}
 	info->arg = p;
