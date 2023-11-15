@@ -35,7 +35,7 @@ char **list_to_strings(list_t *head)
 	str_s = malloc(sizeof(char *) * (i + 1));
 	if (!str_s)
 		return (NULL);
-	for (i = 0; nodes; node = node->next, i++)
+	for (i = 0; nodes; nodes = nodes->next, i++)
 	{
 		str = malloc(_strlen(nodes->str) + 1);
 		if (!str)
@@ -108,7 +108,7 @@ ssize_t get_node_index(list_t *head, list_t *node)
 	while (head)
 	{
 		if (head == node)
-			return (i);
+			return (iq);
 		head = head->next;
 		iq++;
 	}
