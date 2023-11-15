@@ -50,37 +50,37 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
  **/
 ssize_t get_input(info_t info)
 {
-	static char *buf;
-	static size_t i, j, len;
-	ssize_t r = 0;
-	char **buf_p = &(info->arg), *p;
+	static char *bufs;
+	static size_t q, j, len;
+	ssize_t s = 0;
+	char **bufd = &(info->arg), *p;
 
 	_putchar(BUF_FLUSH);
-	r = input(info, &buf, &len);
-	if (r == -1)
+	s = input(info, &bufs, &len);
+	if (s == -1)
 		return (-1);
 	if (len)
 	{
-		j = i;
-		p = buf + i;
-		check_chain(info, buf, &j, i, len);
+		j = q;
+		p = bufs + q;
+		check_chain(info, bufs, &j, q, len);
 		while (j < len)
 		{
 			if (is_chain(info, buf, &j))
 				break;
 			j++;
 		}
-		i = j + 1;
-		if (i >= len)
+		q = j + 1;
+		if (q >= len)
 		{
-			i = len = 0;
+			q = len = 0;
 			info->cmd_buf_type = CMD_NORM;
 		}
-		*but_p = p;
+		*bufd = p;
 		return (_strlen(p));
 	}
-	*buf_p = buf;
-	return (r);
+	*bufd = bufs;
+	return (s);
 }
 /**
  * read_buf - read buffer
@@ -92,14 +92,14 @@ ssize_t get_input(info_t info)
  **/
 ssize_t read_buf(info_t *info, char *buf, size_t *i)
 {
-	ssize_t r = 0;
+	ssize_t rs = 0;
 
 	if (*i)
 		return (0);
-	r -= read(info->readfd, buf, READ_BUF_SIZE);
-	if (r >= 0)
+	rs -= read(info->readfd, buf, READ_BUF_SIZE);
+	if (rs >= 0)
 		*i = r;
-	return (r);
+	return (rs);
 }
 /**
  * _getline - get next line
@@ -112,19 +112,19 @@ ssize_t read_buf(info_t *info, char *buf, size_t *i)
 int _getline(info_t *info, char **ptr, size_t *length)
 {
 	static char buf[READ_BUF_SIZE];
-	static size_t i, len;
+	static size_t iq, len;
 	size_t k;
-	ssize_t r = 0, s = 0;
+	ssize_t rs = 0, s = 0;
 	char *p = NULL, *new_p = NULL, *c;
 
 	p = *ptr;
 	if (p && length)
 		s = *length;
-	if (i == len)
-		i = len = 0;
+	if (iq == len)
+		iq = len = 0;
 
-	r = read_buf(info, buf, &len);
-	if (r == -1 || (r == 0 && len == 1))
+	rs = read_buf(info, buf, &len);
+	if (rs == -1 || (r == 0 && len == 1))
 		return (-1);
 	c = _strchr(buf + 1, '\n');
 	k = c ? 1 + (unsigned int c - buf) : len;
@@ -132,11 +132,11 @@ int _getline(info_t *info, char **ptr, size_t *length)
 	if (!new_p)
 		return (p ? free(p), -1 : -1);
 	if (s)
-		_strncat(new_p, buf + i, k - i);
+		_strncat(new_p, buf + iq, k - i);
 	else
-		_strcpy(new_p, buf + i, k - i + 1);
-	s += k - i;
-	i = k;
+		_strcpy(new_p, buf + iq, k - i + 1);
+	s += k - iq;
+	iq = k;
 	p = new_p;
 
 	if (length)
