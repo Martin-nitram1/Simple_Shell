@@ -53,7 +53,7 @@ ssize_t get_input(info_t info)
 	static char *bufs;
 	static size_t q, j, len;
 	ssize_t s = 0;
-	char **bufd = &(info->arg), *p;
+	char *p;
 
 	_putchar(BUF_FLUSH);
 	s = input_buf(info, &bufs, &len);
@@ -63,7 +63,7 @@ ssize_t get_input(info_t info)
 	{
 		j = q;
 		p = bufs + q;
-		check_chain(&info, bufs, &j, q, len);
+		check_chain(info, bufs, &j, q, len);
 		while (j < len)
 		{
 			if (is_chain(info, bufs, &j))
@@ -79,7 +79,7 @@ ssize_t get_input(info_t info)
 		*bufd = p;
 		return (_strlen(p));
 	}
-	*bufd = bufs;
+	info->arg = p;
 	return (s);
 }
 /**
@@ -127,14 +127,14 @@ int _getline(info_t *info, char **ptr, size_t *length)
 	if (rs == -1 || (rs == 0 && len == 1))
 		return (-1);
 	c = _strchr(buf + 1, '\n');
-	k = c ? 1 + (unsigned int c - buf) : len;
+	k = c ? 1 + (c - buf) : len;
 	new_p = _realloc(p, s, s ? s + k : k + 1);
 	if (!new_p)
 		return (p ? free(p), -1 : -1);
 	if (s)
-		_strcat(new_p, buf + iq, k - i);
+		_strcat(new_p, buf + iq, k - iq);
 	else
-		_strcpy(new_p, buf + iq, k - i + 1);
+		_strcpy(new_p, buf + iq, k - iq + 1);
 	s += k - iq;
 	iq = k;
 	p = new_p;
