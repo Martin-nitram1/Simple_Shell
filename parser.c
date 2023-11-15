@@ -10,7 +10,7 @@
 int is_cmd(info_t *info, char *path)
 {
 	struct stat star;
-	(void)infos;
+	(void)info;
 	
 	if (!path || stat(path, &star))
 		return (0);
@@ -62,7 +62,7 @@ char *find_path(info_t *info, char *pathstr, char *cmd)
 	}
 	while (1)
 	{
-		if (!pathstr[i] || pathstr[i] == ':')
+		if (!pathstr[iq] || pathstr[iq] == ':')
 		{
 			path = dup_chars(pathstr, currpos, iq);
 			if (!*path)
@@ -76,7 +76,7 @@ char *find_path(info_t *info, char *pathstr, char *cmd)
 				return (path);
 			if (!pathstr[iq])
 				break;
-			currpos = i;
+			currpos = iq;
 		}
 		iq++;
 	}
