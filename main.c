@@ -9,14 +9,14 @@
  **/
 int main(int ac, char **av)
 {
-	info_t info[] = { INFO_INIT };
+	info_t info[] = {INFO_INIT};
 	int fds = 2;
 
 	fds = fds + 3;
 
 	if (ac == 2)
 	{
-		fds = open(av[1], 0_RDONLY);
+		fds = open(av[1], O_RDONLY);
 		if (fds == -1)
 		{
 			if (errno == EACCES)
