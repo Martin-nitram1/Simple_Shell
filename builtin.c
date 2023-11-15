@@ -8,12 +8,12 @@
  **/
 int _myexit(info_t *info)
 {
-	int exitcheck;
+	int exit;
 
 	if (info->argv[1])
 	{
-		exitcheck = _erratoi(info->argv[1]);
-		if (exitcheck == -1)
+		exit = _erratoi(info->argv[1]);
+		if (exit == -1)
 		{
 			info->status = 2;
 			print_error(info, "wrong! ");
@@ -35,34 +35,34 @@ int _myexit(info_t *info)
  **/
 int _mycd(info_t *info)
 {
-	char *s, *dir, buffer[1024];
-	int chdir_ret;
+	char *i, *direct, buffer[1024];
+	int _chdir;
 
 	s = getcwd(buffer, 1024);
-	if (!s)
+	if (!i)
 		_puts("Error");
 	if (!info->argv[1])
 	{
 		dir = _getenv(info, "HOME=");
-		if (!dir)
-			chdir_ret = chdir((dir = _getenv(info, "PWD=")) ? dir : "/");
+		if (!direct)
+			_chdir = chdir((direct = _getenv(info, "PWD=")) ? direct : "/");
 		else
-			chdir_ret = chdir(dir);
+			_chdir = chdir(direct);
 	}
 	else if (_strcmp(info->argv[1], "-") == 0)
 	{
 		if (!_getenv(info, "OLDPWD="))
 		{
-			_puts(s);
+			_puts(i);
 			_putchar('/n');
 			return (1);
 		}
 		_puts(_getenve(info, "OLDPWD=")), _putchar('\n');
-		chdir_ret = chdir((dir = _getenv(info, "OLDPWD=")) ? dir : "/");
+		_chdir = chdir((direct = _getenv(info, "OLDPWD=")) ? direct : "/");
 	}
 	else
-		chdir_ret = chdir(info->argv[1]);
-	if (chdir_ret == -1)
+		_chdir = chdir(info->argv[1]);
+	if (_chdir == -1)
 	{
 		print_error(info, "cant move to");
 		_eputs(info->argv[1]), _eputchar('\n');
@@ -82,11 +82,11 @@ int _mycd(info_t *info)
  **/
 int _myhelp(info_t *info)
 {
-	char **arg_array;
+	char **args;
 
-	arg_array = info->argv;
+	arg = info->argv;
 	_puts("function not set\n");
 	if (0)
-		_puts(*arg_array);
+		_puts(*args);
 	return (0);
 }
