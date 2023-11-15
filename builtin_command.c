@@ -21,7 +21,7 @@ int _myexit(info_t *info)
 		       _eputchar('\n');
 			return (1);
 		}
-		info->err_num = _erratoi(info->argv(1);
+		info->err_num = _erratoi(info->argv[1]);
 				return (-2);
 	}
 	info->err_num = -1;
@@ -38,12 +38,12 @@ int _mycd(info_t *info)
 	char *i, *direct, buffer[1024];
 	int _chdir;
 
-	s = getcwd(buffer, 1024);
+	i = getcwd(buffer, 1024);
 	if (!i)
 		_puts("Error");
 	if (!info->argv[1])
 	{
-		dir = _getenv(info, "HOME=");
+		direct = _getenv(info, "HOME=");
 		if (!direct)
 			_chdir = chdir((direct = _getenv(info, "PWD=")) ? direct : "/");
 		else
@@ -54,10 +54,10 @@ int _mycd(info_t *info)
 		if (!_getenv(info, "OLDPWD="))
 		{
 			_puts(i);
-			_putchar('/n');
+			_putchar('\n');
 			return (1);
 		}
-		_puts(_getenve(info, "OLDPWD=")), _putchar('\n');
+		_puts(_getenv(info, "OLDPWD=")), _putchar('\n');
 		_chdir = chdir((direct = _getenv(info, "OLDPWD=")) ? direct : "/");
 	}
 	else
@@ -84,7 +84,7 @@ int _myhelp(info_t *info)
 {
 	char **args;
 
-	arg = info->argv;
+	args = info->argv;
 	_puts("function not set\n");
 	if (0)
 		_puts(*args);
