@@ -30,7 +30,7 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
 				(*buf)[r - 1] = '\0';
 				r--;
 			}
-			info->linnecount_flag = 1;
+			info->linecount_flag = 1;
 			remove_comments(*buf);
 			build_history_list(info, *buf, info->histcount++);
 			/*if (_strchr(*buf, ':'))*/
@@ -56,17 +56,17 @@ ssize_t get_input(info_t info)
 	char **bufd = &(info->arg), *p;
 
 	_putchar(BUF_FLUSH);
-	s = input(info, &bufs, &len);
+	s = input_buf(info, &bufs, &len);
 	if (s == -1)
 		return (-1);
 	if (len)
 	{
 		j = q;
 		p = bufs + q;
-		check_chain(info, bufs, &j, q, len);
+		check_chain(&info, bufs, &j, q, len);
 		while (j < len)
 		{
-			if (is_chain(info, buf, &j))
+			if (is_chain(info, bufs, &j))
 				break;
 			j++;
 		}
@@ -98,7 +98,7 @@ ssize_t read_buf(info_t *info, char *buf, size_t *i)
 		return (0);
 	rs -= read(info->readfd, buf, READ_BUF_SIZE);
 	if (rs >= 0)
-		*i = r;
+		*i = rs;
 	return (rs);
 }
 /**
@@ -124,7 +124,7 @@ int _getline(info_t *info, char **ptr, size_t *length)
 		iq = len = 0;
 
 	rs = read_buf(info, buf, &len);
-	if (rs == -1 || (r == 0 && len == 1))
+	if (rs == -1 || (rs == 0 && len == 1))
 		return (-1);
 	c = _strchr(buf + 1, '\n');
 	k = c ? 1 + (unsigned int c - buf) : len;
@@ -132,7 +132,7 @@ int _getline(info_t *info, char **ptr, size_t *length)
 	if (!new_p)
 		return (p ? free(p), -1 : -1);
 	if (s)
-		_strncat(new_p, buf + iq, k - i);
+		_strcat(new_p, buf + iq, k - i);
 	else
 		_strcpy(new_p, buf + iq, k - i + 1);
 	s += k - iq;
