@@ -123,7 +123,7 @@ int _putsfd(char *str, int fd);
 /*toem_string.c*/
 int _strlen(char *);
 int _strcmp(char *, char *);
-char *startd_with(const char *, const char *);
+char *starts_with(const char *, const char *);
 char *_strcat(char *, char *);
 
 /*string1.c*/
