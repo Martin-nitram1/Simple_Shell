@@ -28,7 +28,7 @@ list_t *add_node(list_t **head, const char *str, int num)
 			return (NULL);
 		}
 	}
-	new_head->next = *head;
+	newhead->next = *head;
 	*head = newhead;
 	return (newhead);
 }
@@ -65,7 +65,7 @@ list_t *add_node_end(list_t **head, const char *str, int num)
 	{
 		while (node->next)
 			node = node->next;
-		node->next = next_node;
+		node->next = newnode;
 	}
 	else
 		*head = newnode;
