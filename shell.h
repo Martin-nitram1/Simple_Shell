@@ -110,6 +110,7 @@ int hsh(info_t *, char **);
 int find_builtin(info_t *);
 void find_cmd(info_t *);
 void fork_cmd(info_t *);
+ssize_t 
 
 /*loopsh.c*/
 int loopsh(char **);
@@ -168,7 +169,7 @@ int _mycd(info_t *);
 int _myhelp(info_t *);
 
 /*getline.c*/
-ssize_t get_intput(info_t *);
+ssize_t get_input(info_t *);
 int _getline(info_t *, char **, size_t *);
 void sigintHandler(int);
 
