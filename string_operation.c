@@ -29,7 +29,7 @@ int _strcmp(char *s1, char *s2)
 	while (*s1 && *s2)
 	{
 		if (*s1 != *s2)
-			return (*21 - *s2);
+			return (*s1 - *s2);
 		s1++;
 		s2++;
 	}
@@ -45,7 +45,7 @@ int _strcmp(char *s1, char *s2)
  *
  * Return: address of next char of strig or NULL
  **/
-char *starts_with(const *haystack, const char *needle)
+char *starts_with(const int *haystack, const char *needle)
 {
 	while (*needle)
 		if (*needle++ != *haystack++)
