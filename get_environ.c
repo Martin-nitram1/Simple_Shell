@@ -40,7 +40,7 @@ int _unsetenv(info_t *info, char *var)
 			continue;
 		}
 		node = node->next;
-		j++
+		j++;
 	}
 	return (info->env_changed);
 }
@@ -61,7 +61,7 @@ int _setenv(info_t *info, char *var, char *value)
 	if (!var || !value)
 		return (0);
 	buffer = malloc(_strlen(var) + _strlen(value) + 2);
-	if (!buf)
+	if (!buffer)
 		return (1);
 	_strcpy(buffer, var);
 	_strcat(buffer, "=");
