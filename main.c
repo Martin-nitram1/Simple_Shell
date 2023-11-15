@@ -10,14 +10,14 @@
 int main(int ac, char **av)
 {
 	info_t info[] = { INFO_INIT };
-	int fd = 2;
+	int fds = 2;
 
-	fd = fd + 3;
+	fds = fds + 3;
 
 	if (ac == 2)
 	{
-		fd = open(av[1], 0_RDONLY);
-		if (fd == -1)
+		fds = open(av[1], 0_RDONLY);
+		if (fds == -1)
 		{
 			if (errno == EACCES)
 				exit(126);
@@ -32,7 +32,7 @@ int main(int ac, char **av)
 			}
 			return (EXIT_FAILURE);
 		}
-		info->readfd = fd;
+		info->readfd = fds;
 	}
 	populate_env_list(info);
 	read_history(info);

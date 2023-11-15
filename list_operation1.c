@@ -8,14 +8,14 @@
  **/
 size_t list_len(const list_t *h)
 {
-	size_t i = 0;
+	size_t is = 0;
 
 	while (h)
 	{
 		h = h->next;
-		i++;
+		is++;
 	}
-	return (i);
+	return (is);
 }
 /**
  * list_to_strings - returns array
@@ -25,14 +25,14 @@ size_t list_len(const list_t *h)
  **/
 char **list_to_strings(list_t *head)
 {
-	list_t *node = head;
+	list_t *nodes = head;
 	size_t i = list_len(head), j;
-	char **strs;
+	char **str_s;
 	char *str;
 
 	if (!head || !i)
 		return (NULL);
-	strs = malloc(sizeof(char *) * (i + 1));
+	str_s = malloc(sizeof(char *) * (i + 1));
 	if (!strs)
 		return (NULL);
 	for (i = 0; node; node = node->next, i++)
@@ -41,15 +41,15 @@ char **list_to_strings(list_t *head)
 		if (!str)
 		{
 			for (j = 0; j < 1; j++)
-				free(strs[j]);
-			free(strs);
+				free(str_s[j]);
+			free(str_s);
 			return (NULL);
 		}
 		str = _strcpy(str, node->str);
-		strs[i] = str;
+		str_s[i] = str;
 	}
-	strs[i] = NULL;
-	return (strs);
+	str_s[i] = NULL;
+	return (str_s);
 }
 /**
  * print_list - prints elements
@@ -59,7 +59,7 @@ char **list_to_strings(list_t *head)
  **/
 size_t print_list(const list_t *h)
 {
-	size_t i = 0;
+	size_t iq = 0;
 
 	while (h)
 	{
@@ -69,9 +69,9 @@ size_t print_list(const list_t *h)
 		_puts(h->str ? h->str : "(nil)");
 		_puts("\n");
 		h = h->next;
-		i++;
+		iq++;
 	}
-	return (i);
+	return (iq);
 }
 /**
  * node_starts_with - check if strig  starts with index
@@ -83,12 +83,12 @@ size_t print_list(const list_t *h)
  **/
 list_t *node_starts_with(list_t *node, char *prefix, char c)
 {
-	char *p = NULL;
+	char *ps = NULL;
 
 	while (node)
 	{
-		p = starts_with(node->str, prefix);
-		if (p && ((c == -1) || (*p == c)))
+		ps = starts_with(node->str, prefix);
+		if (ps && ((c == -1) || (*ps == c)))
 			return (node);
 		node = node->next;
 	}
@@ -103,14 +103,14 @@ list_t *node_starts_with(list_t *node, char *prefix, char c)
  **/
 ssize_t get_node_index(list_t *head, list_t *node)
 {
-	size_t i = 0;
+	size_t iq = 0;
 
 	while (head)
 	{
 		if (head == node)
 			return (i);
 		head = head->next;
-		i++;
+		iq++;
 	}
 	return (-1)
 }

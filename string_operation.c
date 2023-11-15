@@ -8,13 +8,13 @@
  **/
 int _strlen(char *s)
 {
-	int i = 0;
+	int ic = 0;
 
 	if (!s)
 		return (0);
 	while (*s++)
-		i++;
-	return (i);
+		ic++;
+	return (ic);
 }
 /**
  * _strcmp - compare 2 strings
@@ -61,12 +61,12 @@ char *starts_with(const *haystack, const char *needle)
  **/
 char *_strcat(char *dest, char *src)
 {
-	char *ret = dest;
+	char *rets = dest;
 
 	while (*dest)
 		dest++;
 	while (*src)
 		*dest++ = *src++;
 	*dest = *src;
-	return (ret);
+	return (rets);
 }
