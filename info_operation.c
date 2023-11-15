@@ -69,7 +69,7 @@ void free_info(info_t *info, int all)
 		info->environ = NULL;
 		bfree((void **)info->cmd_buf);
 		if (info->readfd > 2)
-			clse(info->readfd);
+			close(info->readfd);
 		_putchar(BUF_FLUSH);
 	}
 }
