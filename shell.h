@@ -152,7 +152,7 @@ int bfree(void **);
 
 /*atoi.c*/
 int interactive(info_t *);
-int is_delimiter(char, char *);
+int is_delim(char, char *);
 int _isalpha(int);
 int _atoi(char *);
 
@@ -217,5 +217,8 @@ void check_chain(info_t *, char *, size_t *, size_t, size_t);
 int replace_alias(info_t *);
 int replace_vars(info_t *);
 int replace_string(char **, char *);
+
+int _myhistory(info_t *);
+int _myalias(info_t *);
 
 #endif /*SHELL.H*/
