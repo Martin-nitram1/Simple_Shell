@@ -58,11 +58,11 @@ int print_d(int input, int fd)
 	unsigned int abs, curr;
 
 	if (fd == STDERR_FILENO)
-		__putchar = _eputchar;
+		_putchar = _eputchar;
 	if (input < 0)
 	{
-		abs = _input;
-		__putchar('-');
+		abs = input;
+		_putchar('-');
 		count++;
 	}
 	else
@@ -72,12 +72,12 @@ int print_d(int input, int fd)
 	{
 		if (abs / e)
 		{
-			__putchar('0' + curr / e);
+			_putchar('0' + curr / e);
 			count++;
 		}
 		curr %= e;
 	}
-	__putchar('0' + curr);
+	_putchar('0' + curr);
 	count++;
 	return (count);
 }
@@ -99,16 +99,16 @@ char *convert_number(long int num, int base, int flags)
 
 	if (!(flags & CONVERT_UNSIGNED) && num < 0)
 	{
-		n = -num;
+		i = -num;
 		sig = '-';
 	}
 	ray = flags & CONVERT_LOWERCASE ? "0123456789abcdef" : "0123456789ABCDEF";
 	ptr = &buffer[49];
 	*ptr = '\0';
-	while (n != 0)
+	while (i != 0)
 	{
-		*--ptr = ray[n % base];
-		n /= base;
+		*--ptr = ray[i % base];
+		i /= base;
 	}
 	if (sig)
 		*--ptr = sig;
