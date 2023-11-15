@@ -22,7 +22,7 @@ int hsh(info_t *info, char **av)
 		if (rs != -1)
 		{
 			set_info(info, av);
-			builtin_ret = find_builtin(info);
+			builtin_r = find_builtin(info);
 			if (builtin_r == -1)
 				find_cmd(info);
 		}
