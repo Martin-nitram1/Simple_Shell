@@ -34,7 +34,7 @@ int _erratoi(char *s)
  *
  * Return: void
  **/
-void print_error(into_t *info, char *estr)
+void print_error(info_t *info, char *estr)
 {
 	_eputs(info->fname);
 	_eputs(": ");
