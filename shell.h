@@ -112,9 +112,6 @@ void find_cmd(info_t *);
 void fork_cmd(info_t *);
 ssize_t 
 
-/*loopsh.c*/
-int loopsh(char **);
-
 /*toem_errors.c*/
 void _eputs(char *);
 int _eputchar(char);
