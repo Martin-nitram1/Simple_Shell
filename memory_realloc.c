@@ -23,7 +23,7 @@ char *_memset(char *s, char b, unsigned int n)
  **/
 void ffree(char **pp)
 {
-	char **ab == pp;
+	char **ab = pp;
 
 	if (!pp)
 		return;
@@ -49,7 +49,7 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 		return (free(ptr), NULL);
 	if (new_size == old_size)
 		return (ptr);
-	old _size = old_size < new_size ? old_size : new_size;
+	old_size = old_size < new_size ? old_size : new_size;
 
 	while (old_size--)
 		pa[old_size] = ((char *)ptr)[old_size];
