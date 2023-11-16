@@ -49,39 +49,39 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
  **/
 ssize_t get_input(info_t *info)
 {
-	static char *bufs;
-	static size_t q, j, len;
-	ssize_t s = 0;
-	char **_p = &(info->arg);
-	char *p = NULL;
+	ssize_t r = 0;
 
-	_putchar(BUF_FLUSH);
-	s = input_buf(info, &bufs, &len);
-	if (s == -1)
-		return (-1);
-	if (len)
+#ifdef USE_GETLINE
+	if (isatty(STDIN_FILENO))
 	{
-		j = q;
-		p = bufs + q;
-		
-		check_chain(info, bufs, &j, q, len);
-		while (j < len)
-		{
-			if (is_chain(info, bufs, &j))
-				break;
-			j++;
-		}
-		q = j + 1;
-		if (q >= len)
-		{
-			q = len = 0;
-			info->cmd_buf_type = CMD_NORM;
-		}
-		*_p = p;
-		return (_strlen(p));
+		printf("$ ");
+		r = _getline(info, &info->arg, NULL);
 	}
-	*_p = bufs;
-	return (s);
+	else
+#endif
+		r = read(info->readfd, info->arg, READ_BUF_SIZE);
+
+	if (r == -1)
+	{
+		info->err_num = errno;
+		if (errno == EINTR)
+			return (0);
+		return (-1);
+	}
+	info->arg[r] = '\0';
+
+	if (!r && isatty(STDIN_FILENO))
+	{
+		info->err_num = -1;
+		return (-1);
+	}
+
+	if (isatty(STDIN_FILENO))
+	{
+		printf("$ ");
+		remove_comments(info->arg);
+	}
+	return (r);
 }
 /**
  * read_buf - read buffer
