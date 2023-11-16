@@ -59,12 +59,12 @@ int _myunsetenv(info_t *info)
 {
 	int j;
 
-	if (info->argc == 1)
+	if (info->argc < 2)
 	{
 		_eputs("insufficient arguments\n");
 		return (1);
 	}
-	for (j = 1; j <= info->argc; j++)
+	for (j = 1; j < info->argc; j++)
 		_unsetenv(info, info->argv[j]);
 	return (0);
 }
