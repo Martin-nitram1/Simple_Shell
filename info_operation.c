@@ -10,7 +10,7 @@
 void clear_info(info_t *info)
 {
 	info->arg = NULL;
-	info->arg = NULL;
+	info->argv = NULL;
 	info->path = NULL;
 	info->argc = 0;
 }
@@ -64,6 +64,8 @@ void free_info(info_t *info, int all)
 		if (info->env)
 			free_list(&(info->env));
 		if (info->history)
+			free_list(&(info->history));
+		if (info->alias)
 			free_list(&(info->alias));
 		ffree(info->environ);
 		info->environ = NULL;
