@@ -10,38 +10,17 @@
  **/
 int hsh(info_t *info, char **av)
 {
-	ssize_t rs = 0;
-	int builtin_r = 0;
-
-	while (rs != -1 && builtin_r != -2)
-	{
-		clear_info(info);
-		if (interactive(info))
-			_puts("$ ");
-		_eputchar(BUF_FLUSH);
-		rs = get_input(info);
-		if (rs != -1)
+	while (1)
 		{
-			set_info(info, av);
-			builtin_r = find_builtin(info);
-			if (builtin_r == -1)
-				find_cmd(info);
+			printf("$ ");
+
+			if (get_input(info) == -1)
+			{
+				break;
+			}
 		}
-		else if (interactive(info))
-			_putchar('\n');
-		free_info(info, 0);
-	}
-	write_history(info);
 	free_info(info, 1);
-	if (!interactive(info) && info->status)
-		exit(info->status);
-	if (builtin_r == -2)
-	{
-		if (info->err_num == -1)
-			exit(info->status);
-		exit(info->err_num);
-	}
-	return (builtin_r);
+	return (0);
 }
 /**
  * find_builtin - finds builtin command
