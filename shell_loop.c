@@ -68,7 +68,6 @@ int find_builtin(info_t *info)
 	{
 		info->line_count++;
 		built_in = builtintbl[i].func(info);
-		break;
 	}
 	return (built_in);
 }
