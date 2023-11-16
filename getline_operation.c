@@ -33,7 +33,6 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
 			info->linecount_flag = 1;
 			remove_comments(*buf);
 			build_history_list(info, *buf, info->histcount++);
-			/*if (_strchr(*buf, ':'))*/
 			{
 				*len = r;
 				info->cmd_buf = buf;
@@ -53,7 +52,8 @@ ssize_t get_input(info_t *info)
 	static char *bufs;
 	static size_t q, j, len;
 	ssize_t s = 0;
-	char *p = NULL;;
+	char **_p = &(info->arg);
+	char *p = NULL;
 
 	_putchar(BUF_FLUSH);
 	s = input_buf(info, &bufs, &len);
@@ -63,6 +63,7 @@ ssize_t get_input(info_t *info)
 	{
 		j = q;
 		p = bufs + q;
+		
 		check_chain(info, bufs, &j, q, len);
 		while (j < len)
 		{
@@ -76,10 +77,10 @@ ssize_t get_input(info_t *info)
 			q = len = 0;
 			info->cmd_buf_type = CMD_NORM;
 		}
-		bufs = p;
+		*_p = p;
 		return (_strlen(p));
 	}
-	info->arg = p;
+	*_p = bufs;
 	return (s);
 }
 /**
@@ -132,9 +133,9 @@ int _getline(info_t *info, char **ptr, size_t *length)
 	if (!new_p)
 		return (p ? free(p), -1 : -1);
 	if (s)
-		_strcat(new_p, buf + iq);
+		_strncat(new_p, buf + iq, k - iq);
 	else
-		_strcpy(new_p, buf + iq);
+		_strncpy(new_p, buf + iq, k - iq + 1);
 	s += k - iq;
 	iq = k;
 	p = new_p;
