@@ -59,7 +59,7 @@ int _myunsetenv(info_t *info)
 {
 	int j;
 
-	if (info->argc < 2)
+	if (info->argc == 1)
 	{
 		_eputs("insufficient arguments\n");
 		return (1);
