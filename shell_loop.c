@@ -22,7 +22,7 @@ int hsh(info_t *info, char **av)
 			r = get_input(info);
 			if (r != -1)
 			{
-				set_info(info, av));
+				set_info(info, av);
 				build = find_builtin(info);
 				if (build == -1)
 					find_cmd(info);
