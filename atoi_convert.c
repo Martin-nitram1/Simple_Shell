@@ -18,7 +18,12 @@ int interactive(info_t *info)
  **/
 int is_delim(char c, char *delim)
 {
-	return (_strchr(delim, c) != NULL);
+	while (*delim)
+		{
+		if (*delim++ == c)
+			return (1);
+		}
+	return (0);
 }
 /**
  * _isalpha - is alphanumeric?
