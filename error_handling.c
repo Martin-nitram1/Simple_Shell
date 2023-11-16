@@ -27,9 +27,8 @@ int _eputchar(char c)
 	static int j;
 	static char buf[WRITE_BUF_SIZE];
 
-	if (c == BUF_FLUSH || j >= WRITE_BUF_SIZE - 1)
+	if (c == BUF_FLUSH || j >= WRITE_BUF_SIZE)
 	{
-		buf[j] = '\0';
 		write(2, buf, j);
 		j = 0;
 	}
@@ -49,9 +48,8 @@ int _putfd(char c, int fd)
 	static int j;
 	static char buf[WRITE_BUF_SIZE];
 
-	if (c == BUF_FLUSH || j >= WRITE_BUF_SIZE - 1)
+	if (c == BUF_FLUSH || j >= WRITE_BUF_SIZE)
 	{
-		buf[j] = '\0';
 		write(fd, buf, j);
 		j = 0;
 	}
@@ -68,5 +66,13 @@ int _putfd(char c, int fd)
  **/
 int _putsfd(char *str, int fd)
 {
-	return (_putsfd(c, fd));
+	int j = 0;
+
+	if (!str)
+		return (0);
+	while (*str)
+		{
+			j += _putsfd(*str++, fd);
+		}
+	return (j);
 }
