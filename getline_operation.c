@@ -76,11 +76,6 @@ ssize_t get_input(info_t *info)
 		info->err_num = -1;
 		return (-1);
 	}
-
-	if (isatty(STDIN_FILENO))
-	{
-		printf("$ ");
-	}
 	remove_comments(info->arg);
 	return (r);
 }
