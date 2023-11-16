@@ -33,11 +33,6 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
 			info->linecount_flag = 1;
 			remove_comments(*buf);
 			build_history_list(info, *buf, info->histcount++);
-			if (_strchr(*buf, ';'))
-			{
-				*len = r;
-				info->cmd_buf = buf;
-			}
 		}
 	}
 	return (r);
@@ -50,34 +45,36 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
  **/
 ssize_t get_input(info_t *info)
 {
+	static char *buf;
+	static size_t i, j, len;
 	ssize_t r = 0;
+	char **buf_p = &(info-arg), *p;
 
-#ifdef USE_GETLINE
-	if (isatty(STDIN_FILENO))
-	{
-		write(STDOUT_FILENO, "$", 2);
-		r = _getline(info, &info->arg, NULL);
-	}
-	else
-#endif
-		r = read(info->readfd, info->arg, READ_BUF_SIZE);
-
+	_putchar(BUF_FLUSH);
+	r = input_buf(info, &buf, &len);
 	if (r == -1)
-	{
-		info->err_num = errno;
-		if (errno == EINTR)
-			return (0);
 		return (-1);
-	}
-	info->arg[r] = '\0';
+	if (len)
+	{
+		j = i;
+		p = buf + i;
 
-	if (!r && isatty(STDIN_FILENO))
-	{
-		info->err_num = -1;
-		return (-1);
+		chec_chain(info, buf, &j, i, len);
+		while (j < len)
+			{
+				if (is_chain(info, buf, &j))
+					break;
+				j++;
+			}
+		i = j + 1;
+		if (i >= len)
+		{
+			i = len = 0;
+			info->cmd_buf_type = CMD_NORM;
+		}
+		*buf_p = buf;
+		return (r);
 	}
-	remove_comments(info->arg);
-	return (r);
 }
 /**
  * read_buf - read buffer
