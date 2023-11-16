@@ -8,15 +8,12 @@
  **/
 void _eputs(char *str)
 {
-	int j = 0;
-
 	if (!str)
 		return;
-	while (str[j] != '\0')
-	{
-		_eputchar(str[j]);
-		j++;
-	}
+	while (*str)
+		{
+			_eputchar(*str++);
+		}
 }
 /**
  * _eputchar - writes char to stderr
@@ -30,8 +27,9 @@ int _eputchar(char c)
 	static int j;
 	static char buf[WRITE_BUF_SIZE];
 
-	if (c == BUF_FLUSH || j >= WRITE_BUF_SIZE)
+	if (c == BUF_FLUSH || j >= WRITE_BUF_SIZE - 1)
 	{
+		buf[j] = '\0';
 		write(2, buf, j);
 		j = 0;
 	}
@@ -51,8 +49,9 @@ int _putfd(char c, int fd)
 	static int j;
 	static char buf[WRITE_BUF_SIZE];
 
-	if (c == BUF_FLUSH || j >= WRITE_BUF_SIZE)
+	if (c == BUF_FLUSH || j >= WRITE_BUF_SIZE - 1)
 	{
+		buf[j] = '\0';
 		write(fd, buf, j);
 		j = 0;
 	}
@@ -69,13 +68,13 @@ int _putfd(char c, int fd)
  **/
 int _putsfd(char *str, int fd)
 {
-	int j = 0;
+	int count = 0;
 
 	if (!str)
 		return (0);
 	while (*str)
 	{
-		j += _putsfd(str++, fd);
+		count += _putsfd(*str++, fd);
 	}
-	return (j);
+	return (count);
 }
