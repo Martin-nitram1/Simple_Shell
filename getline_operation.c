@@ -56,7 +56,7 @@ ssize_t get_input(info_t *info)
 	char *p;
 
 	_putchar(BUF_FLUSH);
-	s = input_buf(&info, &bufs, &len);
+	s = input_buf(info, &bufs, &len);
 	if (s == -1)
 		return (-1);
 	if (len)
@@ -66,7 +66,7 @@ ssize_t get_input(info_t *info)
 		check_chain(info, bufs, &j, q, len);
 		while (j < len)
 		{
-			if (is_chain(&info, bufs, &j))
+			if (is_chain(info, bufs, &j))
 				break;
 			j++;
 		}
@@ -76,7 +76,7 @@ ssize_t get_input(info_t *info)
 			q = len = 0;
 			info->cmd_buf_type = CMD_NORM;
 		}
-		*bufs = p;
+		bufs = p;
 		return (_strlen(p));
 	}
 	info->arg = p;
@@ -132,9 +132,9 @@ int _getline(info_t *info, char **ptr, size_t *length)
 	if (!new_p)
 		return (p ? free(p), -1 : -1);
 	if (s)
-		_strcat(new_p, buf + iq, k - iq);
+		_strcat(new_p, buf + iq);
 	else
-		_strcpy(new_p, buf + iq, k - iq + 1);
+		_strcpy(new_p, buf + iq);
 	s += k - iq;
 	iq = k;
 	p = new_p;
