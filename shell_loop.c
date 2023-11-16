@@ -80,6 +80,7 @@ int find_builtin(info_t *info)
 void find_cmd(info_t *info)
 {
 	char *path = NULL;
+	char **token = NULL;
 	int i, k;
 
 	info->path = info->argv[0];
@@ -101,13 +102,18 @@ void find_cmd(info_t *info)
 	}
 	else
 	{
-		if ((interactive(info) || _getenv(info, "PATH=")
-					|| info->argv[0][0] == '/') && is_cmd(info, info->argv[0]))
-			fork_cmd(info);
-		else if (*(info->arg) != '\n')
+		*token = _strtow(info->arg, " \t\n");
+
+		if (token)
 		{
-			info->status = 127;
-			print_error(info, "not found\n");
+			info->argv = token;
+			fork_cmd(info);
+			bfree(token);
+		}
+		else
+		{
+			info ->status = 1;
+			print_error(info, "Error in command\n");
 		}
 	}
 }
