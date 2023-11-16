@@ -68,13 +68,5 @@ int _putfd(char c, int fd)
  **/
 int _putsfd(char *str, int fd)
 {
-	int count = 0;
-
-	if (!str)
-		return (0);
-	while (*str)
-	{
-		count += _putsfd(*str++, fd);
-	}
-	return (count);
+	return (_putsfd(c, fd));
 }
