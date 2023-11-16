@@ -27,7 +27,7 @@ char *_strncpy(char *dest, char *src, int n)
  *
  * Return: concat strings
  **/
-char *_strncat(char *dest, char *src)
+char *_strncat(char *dest, char *src, __attribute__((unused))int n)
 {
 	char *s = dest;
 
