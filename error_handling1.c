@@ -61,7 +61,7 @@ int print_d(int input, int fd)
 		_putchar = _eputchar;
 	if (input < 0)
 	{
-		abs = input;
+		abs = -input;
 		_putchar('-');
 		count++;
 	}
