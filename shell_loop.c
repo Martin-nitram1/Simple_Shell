@@ -12,6 +12,7 @@ int hsh(info_t *info, char **av)
 	ssize_t r = 0;
 	int build = 0;
 
+	printf("$ ");
 	while (r != -1 && build != -2)
 		{
 			clear_info(info);
