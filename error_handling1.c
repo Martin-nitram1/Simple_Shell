@@ -9,7 +9,7 @@
 int _erratoi(char *s)
 {
 	int f = 0;
-	long int res = 0;
+	unsigned long int res = 0;
 
 	if (*s == '+')
 		s++;
@@ -53,16 +53,16 @@ void print_error(info_t *info, char *estr)
  **/
 int print_d(int input, int fd)
 {
-	int (*_putchar)(char) = _putchar;
+	int (*__putchar)(char) = _putchar;
 	int e, count = 0;
 	unsigned int abs, curr;
 
 	if (fd == STDERR_FILENO)
-		_putchar = _eputchar;
+		__putchar = _eputchar;
 	if (input < 0)
 	{
 		abs = -input;
-		_putchar('-');
+		__putchar('-');
 		count++;
 	}
 	else
@@ -72,12 +72,12 @@ int print_d(int input, int fd)
 	{
 		if (abs / e)
 		{
-			_putchar('0' + curr / e);
+			__putchar('0' + curr / e);
 			count++;
 		}
 		curr %= e;
 	}
-	_putchar('0' + curr);
+	__putchar('0' + curr);
 	count++;
 	return (count);
 }
