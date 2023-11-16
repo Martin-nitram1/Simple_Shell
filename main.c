@@ -7,7 +7,7 @@
  *
  * Return: 0 if success, 0 otherwise
  **/
-int main(int argc, char **argv, char **env)
+int main(void)
 {
 	info_t info = INFO_INIT;
 
