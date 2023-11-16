@@ -108,7 +108,7 @@ void find_cmd(info_t *info)
 		{
 			info->argv = token;
 			fork_cmd(info);
-			bfree(token);
+			ffree(token);
 		}
 		else
 		{
@@ -141,7 +141,7 @@ void fork_cmd(info_t *info)
 			free_info(info, 1);
 			if (errno == EACCES)
 				exit(126);
-			exit(1);
+			_myexit(1);
 		}
 	}
 	else
