@@ -113,7 +113,7 @@ void fork_cmd(info_t *);
 ssize_t 
 
 /*toem_errors.c*/
-void _eputs(char *str);
+void _eputs(const char *str);
 int _eputchar(char);
 int _putfd(char c, int fd);
 int _putsfd(char *str, int fd);
