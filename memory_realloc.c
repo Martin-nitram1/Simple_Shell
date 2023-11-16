@@ -42,17 +42,13 @@ void ffree(char **pp)
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
 	char *pa = NULL;
+	unsigned int i;
 
-	if (!ptr)
-		return (malloc(new_size));
-	if (!new_size)
-		return (free(ptr), NULL);
-	if (new_size == old_size)
-		return (ptr);
-	old_size = old_size < new_size ? old_size : new_size;
-
-	while (old_size--)
-		pa[old_size] = ((char *)ptr)[old_size];
+	pa = malloc(new_size);
+	if (!pa)
+		return (NULL);
+	for (i = 0; i < old_size; i++)
+		pa[i] = ((char *)ptr)[i];
 	free(ptr);
 	return (pa);
 }
