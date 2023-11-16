@@ -25,7 +25,6 @@
 #define CONVERT_UNSIGNED   2
 
 #define USE_GETLINE 0
-#define USE_strtok 0
 
 #define HIST_FILE ".simple_shell_history"
 #define HIST_MAX 4096
@@ -50,8 +49,8 @@ typedef struct liststr
  *		allowing uniform prototype for function pointer struct
  *@arg: string from getline
  *@argv: array of string
- *@path:L strign with current command
- *@path: path of current command
+ *@path: string with current command
+ *        path of current command
  *@argc: argument count
  *@line_count: error count
  *@err_num: error code
