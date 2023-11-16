@@ -110,7 +110,6 @@ int hsh(info_t *, char **);
 int find_builtin(info_t *);
 void find_cmd(info_t *);
 void fork_cmd(info_t *);
-ssize_t 
 
 /*toem_errors.c*/
 void _eputs(char *);
