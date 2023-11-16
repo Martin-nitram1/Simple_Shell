@@ -7,7 +7,7 @@
  *
  * Return: 0 if success, 0 otherwise
  **/
-int main(void)
+int main(__attribute__((unused))int ac, __attribute__((unused))char **av, char *env)
 {
 	info_t info = INFO_INIT;
 
