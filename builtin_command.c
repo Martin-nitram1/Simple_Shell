@@ -22,7 +22,7 @@ int _myexit(info_t *info)
 			return (1);
 		}
 		info->err_num = _erratoi(info->argv[1]);
-				return (-2);
+		return (-2);
 	}
 	info->err_num = -1;
 	return (-2);
@@ -38,7 +38,7 @@ int _mycd(info_t *info)
 	char *i, *direct, buffer[1024];
 	int _chdir;
 
-	i = getcwd(buffer, sizeof(buffer));
+	i = getcwd(buffer, 1024);
 	if (!i)
 	{
 		perror("getcwd");
