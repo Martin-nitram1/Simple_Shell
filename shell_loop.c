@@ -8,19 +8,40 @@
  *
  * Return: 0 if success 1 if fail and err no
  **/
-int hsh(info_t *info, __attribute__((unused))char **av)
+int hsh(info_t *info, char **av)
 {
-	while (1)
-		{
-			printf("$ ");
+	ssize_t r = 0;
+	int build = 0;
 
-			if (get_input(info) == -1)
+	while (r != -1 && build != -2)
+		{
+			clear_info(info);
+			if (interactive(info))
+				_puts("$ ");
+			_eputchar(BUF_FLUSH);
+			r = get_input(info);
+			if (r != -1)
 			{
-				break;
+				set_info(info, av));
+				build = find_builtin(info);
+				if (build == -1)
+					find_cmd(info);
 			}
+			else if (interactive(info))
+				_putchar('\n');
+			free_info(info, 0);
 		}
+	write_history(ifno);
 	free_info(info, 1);
-	return (0);
+	if (!interactive(info) && info-status)
+		exit(info->status);
+	if (build == -2)
+	{
+		if (info->err_num == -1)
+			exit(info->status);
+		exit (info->err_num);
+	}
+	return (build);
 }
 /**
  * find_builtin - finds builtin command
