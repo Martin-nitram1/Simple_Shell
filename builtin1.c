@@ -85,7 +85,6 @@ int _myalias(info_t *info)
 	int j = 0;
 	char *c = NULL;
 	list_t *node = NULL;
-	list_t *found = NULL;
 
 	if (info->argc == 1)
 	{
@@ -104,11 +103,7 @@ int _myalias(info_t *info)
 		if (c)
 			set_alias(info, info->argv[j]);
 		else
-			found = node_starts_with(info->alias, info->argv[j], '=');
-			if (found)
-			{
-				print_alias(found);
-			}
+			print_alias(fnode_starts_with(info->alias, info->argv[j], '=');
 	}
 	return (0);
 }
