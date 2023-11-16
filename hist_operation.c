@@ -36,7 +36,7 @@ int write_history(info_t *info)
 
 	if (!file_name)
 		return (-1);
-	fd = open(file_name, O_CREATE | O_TRUNC | O_RDWR, 0644);
+	fd = open(file_name, O_CREAT | O_TRUNC | O_RDWR, 0644);
 	free(file_name);
 	if (fd == -1)
 		return (-1);
@@ -65,7 +65,7 @@ int read_history(info_t *info)
 	if (!file_name)
 		return (0);
 
-	fd = open(file_name, 0_RDONLY);
+	fd = open(file_name, O_RDONLY);
 	free(file_name);
 	if (fd == -1)
 		return (0);
