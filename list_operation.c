@@ -145,8 +145,9 @@ void free_list(list_t **head_ptr)
 	while (nodes)
 	{
 		nextnode = nodes->next;
+		free(nodes->str);
 		free(nodes);
 		nodes = nextnode;
 	}
-	head_ptr = NULL;
+	*head_ptr = NULL;
 }
