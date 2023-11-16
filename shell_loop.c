@@ -1,3 +1,4 @@
+
 #include "shell.h"
 
 /**
@@ -121,6 +122,7 @@ void find_cmd(info_t *info)
 void fork_cmd(info_t *info)
 {
 	pid_t child_pid;
+	int status;
 
 	child_pid = fork();
 	if (child_pid == -1)
@@ -140,10 +142,10 @@ void fork_cmd(info_t *info)
 	}
 	else
 	{
-		wait(&(info->status));
-		if (WIFEXITED(info->status))
+		waitpid(child_pid, &status, 0));
+		if (WIFEXITED(status))
 		{
-			info->status = WEXITSTATUS(info->status);
+			info->status = WEXITSTATUS(status);
 			if (info->status == 126)
 				print_error(info, "Permission denied\n");
 		}
