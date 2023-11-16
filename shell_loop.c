@@ -142,7 +142,7 @@ void fork_cmd(info_t *info)
 	}
 	else
 	{
-		waitpid(child_pid, &status, 0));
+		waitpid(child_pid, &status, 0);
 		if (WIFEXITED(status))
 		{
 			info->status = WEXITSTATUS(status);
