@@ -7,7 +7,7 @@
  **/
 int interactive(info_t *info)
 {
-	return (isatty(STDIN_FILENO) && info->readfd <= 2);
+	return (isatty(STDIN_FILENO) && info->readfd == STDIN_FILENO);
 }
 /**
  * is_delim - check if delimiter
@@ -56,7 +56,7 @@ int _atoi(char *s)
 		{
 			wave = 1;
 			res *= 10;
-			res += (s[m] = '0');
+			res += (s[m] - '0');
 		}
 		else if (wave == 1)
 			wave = 2;
