@@ -81,7 +81,7 @@ ssize_t get_input(info_t *info)
 	{
 		printf("$ ");
 	}
-	remove_comments(info->arg)
+	remove_comments(info->arg);
 	return (r);
 }
 /**
