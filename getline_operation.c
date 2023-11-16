@@ -53,7 +53,7 @@ ssize_t get_input(info_t *info)
 	static char *bufs;
 	static size_t q, j, len;
 	ssize_t s = 0;
-	char *p;
+	char *p = NULL;;
 
 	_putchar(BUF_FLUSH);
 	s = input_buf(info, &bufs, &len);
