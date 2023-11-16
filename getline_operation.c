@@ -55,7 +55,7 @@ ssize_t get_input(info_t *info)
 #ifdef USE_GETLINE
 	if (isatty(STDIN_FILENO))
 	{
-		printf("$ ");
+		write(STDOUT_FILENO, "$", 2);
 		r = _getline(info, &info->arg, NULL);
 	}
 	else
