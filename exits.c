@@ -27,7 +27,7 @@ char *_strncpy(char *dest, char *src, int n)
  *
  * Return: concat strings
  **/
-char *_strncat(char *dest, char *src, int n)
+char *_strncat(char *dest, char *src)
 {
 	char *s = dest;
 
@@ -47,7 +47,8 @@ char *_strncat(char *dest, char *src, int n)
  **/
 char *_strchr(char *s, char c)
 {
-	do {
+	do
+	{
 		if (*s == c)
 			return (s);
 	} while (*s++ != '\0');
