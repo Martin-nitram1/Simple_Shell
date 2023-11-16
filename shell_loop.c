@@ -8,7 +8,7 @@
  *
  * Return: 0 if success 1 if fail and err no
  **/
-int hsh(info_t *info, char **av)
+int hsh(info_t *info, __attribute__((unused))char **av)
 {
 	while (1)
 		{
