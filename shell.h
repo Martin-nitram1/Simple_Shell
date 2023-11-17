@@ -25,7 +25,7 @@
 #define TO_UNSIGNED   2
 
 #define USE_GETLINE 0
-#define USE_STRTOK  0;
+#define USE_STRTOK  0
 
 #define HISTORY_FILE ".custom_shell_history"
 #define HIST_MAX 4096
@@ -34,8 +34,8 @@ extern char **environ;
 
 /**
  * struct string_node - singly linked list
- * @num: number field
- * @str: string
+ * @number: number field
+ * @text: string
  * @next: point to net node
  **/
 typedef struct string_node
@@ -46,7 +46,7 @@ typedef struct string_node
 } list_t;
 
 /*
- *struct command_info - contains pseudo-arguements to pass into a function,
+ *struct passinfo - contains pseudo-arguements to pass into a function,
  *			allowing uniform prototype for function pointer struct
  *@argument: string from getline
  *@argument_vector: array of string
@@ -94,7 +94,7 @@ typedef struct passinfo
 	NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0, 0 }
 
 /**
- * struct builtin - built in string
+ * struct builtin_command - built-in string
  * @type: builtin command flag
  * @func: the function
  **/
