@@ -28,7 +28,7 @@ int _eatoi(char *s)
 	return (res);
 }
 /**
- * print_error - print error message
+ * _error - print error message
  * @info: param
  * @estr: error type
  *
@@ -45,13 +45,13 @@ void _error(info_t *info, char *estr)
 	_eputs(estr);
 }
 /**
- * printd - prints decimal
+ * _printd - prints decimal
  * @input: the input
  * @fd: file descriptor
  *
  * Return: nums of chars
  **/
-int printd(int input, int fd)
+int _printd(int input, int fd)
 {
 	int (*__putchar)(char) = _putchar;
 	int e, count = 0;
