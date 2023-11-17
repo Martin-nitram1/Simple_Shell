@@ -29,14 +29,14 @@ void _eputs(char *str)
 int _eputchar(char c)
 {
 	static int j;
-	static char buf[WRITE_BUF_SIZE];
+	static char buf[BUFFER_SIZE_WRITE];
 
-	if (c == BUF_FLUSH || j >= WRITE_BUF_SIZE)
+	if (c == FLUSH_BUFFER || j >= BUFFER_WRITE_SIZE)
 	{
 		write(2, buf, j);
 		j = 0;
 	}
-	if (c != BUF_FLUSH)
+	if (c != FLUSH_BUFFER)
 		buf[j++] = c;
 	return (1);
 }
@@ -50,14 +50,14 @@ int _eputchar(char c)
 int _putfd(char c, int fd)
 {
 	static int j;
-	static char buf[WRITE_BUF_SIZE];
+	static char buf[BUFFER_SIZE_WRITE];
 
-	if (c == BUF_FLUSH || j >= WRITE_BUF_SIZE)
+	if (c == FLUSH_BUFFER || j >= BUFFER_SIZE_WRITE)
 	{
 		write(fd, buf, j);
 		j = 0;
 	}
-	if (c != BUF_FLUSH)
+	if (c != FLUSH_BUFFER)
 		buf[j++] = c;
 	return (1);
 }
