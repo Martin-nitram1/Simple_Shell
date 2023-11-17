@@ -29,7 +29,8 @@ int unsetalias(info_t *info, char *str)
 	c = *j;
 	*j = 0;
 	rit = delete_stringindex(&(info->command_alias),
-			node_index(info->command_alias, find_nodeprefix(info->command_alias, str, -1)));
+		node_index(info->command_alias,
+		find_nodeprefix(info->command_alias, str, -1)));
 	*j = c;
 	return (rit);
 }
@@ -104,7 +105,8 @@ int myalias(info_t *info)
 		if (c)
 			setalias(info, info->argument_vector[j]);
 		else
-			printalias(find_nodeprefix(info->command_alias, info->argument_vector[j], '='));
+			printalias(find_nodeprefix(info->command_alias,
+				info->argument_vector[j], '='));
 	}
 	return (0);
 }
