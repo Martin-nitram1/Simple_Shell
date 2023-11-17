@@ -54,9 +54,9 @@ int identify_built_in(info_t *info)
 	int i, built_in = -1;
 	builtin_commands builtincmd[] = {
 		{"exit", exit_command},
-		{"env", display_env},
+		{"env", display_envcmd},
 		{"help", display_help},
-		{"history", display_history},
+		{"history", displayhistory},
 		{"setenv", set_environ},
 		{"unsetenv", unset_environ},
 		{"cd", _cd},
