@@ -1,24 +1,24 @@
 #include "shell.h"
 
 /**
- * _myhistory - display hist list
+ * displayhistory - display hist list
  * @info: param
  *
  * Return: 0 always
  **/
-int _myhistory(info_t *info)
+int displayhistory(info_t *info)
 {
-	print_list(info->history);
+	print_liststrings(info->command_history);
 	return (0);
 }
 /**
- * unset_alias - set alias to string
+ * unsetalias - set alias to string
  * @info: param
  * @str: string alias
  *
  * Return: 0 always 1 on error
  **/
-int unset_alias(info_t *info, char *str)
+int unsetalias(info_t *info, char *str)
 {
 	char *j, c;
 	int rit;
@@ -28,19 +28,19 @@ int unset_alias(info_t *info, char *str)
 		return (1);
 	c = *j;
 	*j = 0;
-	rit = delete_node_at_index(&(info->alias),
-			get_node_index(info->alias, node_starts_with(info->alias, str, -1)));
+	rit = delete_stringindex(&(info->alias),
+			node_index(info->alias, find_nodeprefix(info->command_alias, str, -1)));
 	*j = c;
 	return (rit);
 }
 /**
- * set_alias - set alias to string
+ * setalias - set alias to string
  * @info: param
  * @str: string alias
  *
  * Return: 0 on success 1 on error
  **/
-int set_alias(info_t *info, char *str)
+int setalias(info_t *info, char *str)
 {
 	char *c;
 
@@ -48,25 +48,25 @@ int set_alias(info_t *info, char *str)
 	if (!c)
 		return (1);
 	if (!*++c)
-		return (unset_alias(info, str));
+		return (unsetalias(info, str));
 
-	unset_alias(info, str);
-	return (add_node_end(&(info->alias), str, 0) == NULL);
+	unsetalias(info, str);
+	return (string_end(&(info->command_alias), str, 0) == NULL);
 }
 /**
- * print_alias - prints an alias string
+ * printalias - prints an alias string
  * @node: alias node
  *
  * Return: 0 always 1 on error
  **/
-int print_alias(list_t *node)
+int printalias(list_t *node)
 {
 	char *c = NULL, *b = NULL;
 
 	if (node)
 	{
-		c = _strchr(node->str, '=');
-		for (b = node->str; b <= c; b++)
+		c = _strchr(node->text, '=');
+		for (b = node->text; b <= c; b++)
 			_putchar(*b);
 		_putchar('\'');
 		_puts(c + 1);
@@ -76,35 +76,35 @@ int print_alias(list_t *node)
 	return (1);
 }
 /**
- * _myalias - alias built in clone
+ * myalias - alias built in clone
  * @info: param
  *
  * Return: 0 always
  **/
-int _myalias(info_t *info)
+int myalias(info_t *info)
 {
 	int j = 0;
 	char *c = NULL;
 	list_t *node = NULL;
 
-	if (info->argc == 1)
+	if (info->argument_count == 1)
 	{
-		node = info->alias;
+		node = info->command_alias;
 		while (node)
 		{
-			print_alias(node);
+			printalias(node);
 			node = node->next;
 		}
 		return (0);
 	}
 
-	for (j = 1; info->argv[j]; j++)
+	for (j = 1; info->argument_vector[j]; j++)
 	{
-		c = _strchr(info->argv[j], '=');
+		c = _strchr(info->argument_vector[j], '=');
 		if (c)
-			set_alias(info, info->argv[j]);
+			setalias(info, info->argument_vector[j]);
 		else
-			print_alias(node_starts_with(info->alias, info->argv[j], '='));
+			printalias(node_startswith(info->command_alias, info->argument_vector[j], '='));
 	}
 	return (0);
 }
