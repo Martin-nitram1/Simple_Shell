@@ -31,7 +31,7 @@ void set_command(info_t *info, char **av)
 		info->argument_vector = strtow(info->argument, " \t");
 		if (!info->argument_vector)
 		{
-			info->argument_vectorv = malloc(sizeof(char *) * 2);
+			info->argument_vector = malloc(sizeof(char *) * 2);
 			if (info->argument_vector)
 			{
 				info->argument_vector[0] = _strdup(info->argument);
@@ -67,8 +67,8 @@ void free_command(info_t *info, int all)
 			_freestring(&(info->command_history));
 		if (info->command_alias)
 			_freestring(&(info->command_alias));
-		free_alloc(info->environment);
-			info->environment = NULL;
+		free_alloc(info->custom_environment);
+			info->custom_environment = NULL;
 		bfree((void **)info->buffer_pointer);
 		if (info->read_file > 2)
 			close(info->read_file);
