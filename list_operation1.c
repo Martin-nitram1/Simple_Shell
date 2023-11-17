@@ -18,7 +18,7 @@ size_t _stringlen(const list_t *h)
 	return (is);
 }
 /**
- * list_to_strings - returns array
+ * list_strings - returns array
  * @head: head node
  *
  * Return: array of strings
@@ -74,7 +74,7 @@ size_t print_liststrings(const list_t *h)
 	return (iq);
 }
 /**
- * node_starts_with - check if strig  starts with index
+ * find_nodeprefix - check if strig  starts with index
  * @node: pointer to list head
  * @prefix: string tpo match
  * @c: next character
@@ -95,7 +95,7 @@ list_t *find_nodeprefix(list_t *node, char *prefix, char c)
 	return (NULL);
 }
 /**
- * get_node_index- gets the index of a node
+ * node_index- gets the index of a node
  * @head: head node
  * @node: pointer to node
  *
