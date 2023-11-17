@@ -22,7 +22,7 @@ int custom_shell(info_t *info, char **av)
 		if (r != -1)
 		{
 			set_command(info, av);
-			build = identify_built_in(info);
+			build = identify_builtin(info);
 			if (build == -1)
 				find_command(info);
 		}
@@ -53,14 +53,14 @@ int identify_built_in(info_t *info)
 {
 	int i, built_in = -1;
 	builtin_commands builtincmd[] = {
-		{"exit", _myexit},
-		{"env", _myenv},
-		{"help", _myhelp},
-		{"history", _myhistory},
-		{"setenv", _mysetenv},
-		{"unsetenv", _myunsetenv},
-		{"cd", _mycd},
-		{"alias", _myalias},
+		{"exit", _exit},
+		{"env", display_envcmd},
+		{"help", display_help},
+		{"history", displayhistory},
+		{"setenv", set_environ},
+		{"unsetenv", unset_environ},
+		{"cd", _cd},
+		{"alias", myalias},
 		{NULL, NULL}
 	};
 
@@ -93,7 +93,7 @@ void find_command(info_t *info)
 		info->linenum_flag = 0;
 	}
 	for (i = 0, k = 0; info->argument[i]; i++)
-		if (!is_delimiter(info->argument[i], " \t\n"))
+		if (!_isdelimiter(info->argument[i], " \t\n"))
 			k++;
 	if (!k)
 		return;
@@ -133,7 +133,7 @@ void fork_command(info_t *info)
 	}
 	if (child_pid == 0)
 	{
-		if (execve(info->execution_path, info->argument_vector, get_environment(info)) == -1)
+		if (execve(info->command_path, info->argument_vector, get_environment(info)) == -1)
 		{
 			free_command(info, 1);
 			if (errno == EACCES)
