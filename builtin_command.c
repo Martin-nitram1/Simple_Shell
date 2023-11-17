@@ -41,7 +41,6 @@ int _mycd(info_t *info)
 	i = getcwd(buffer, 1024);
 	if (!i)
 	{
-		perror("getcwd");
 		return (1);
 	}
 	if (!info->argv[1])
@@ -60,18 +59,15 @@ int _mycd(info_t *info)
 			_putchar('\n');
 			return (1);
 		}
-		_puts(_getenv(info, "OLDPWD="));
-		_putchar('\n');
+		_puts(_getenv(info, "OLDPWD=")), _putchar('\n');
 		_chdir = chdir((direct = _getenv(info, "OLDPWD=")) ? direct : "/");
 	}
 	else
 		_chdir = chdir(info->argv[1]);
 	if (_chdir == -1)
 	{
-		perror("chdir");
 		print_error(info, "cant move to");
-		_eputs(info->argv[1]);
-		_eputchar('\n');
+		_eputs(info->argv[1]), _eputchar('\n');
 	}
 	else
 	{
