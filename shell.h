@@ -21,7 +21,7 @@
 #define COMMAND_AND    2
 #define COMMAND_CHAIN  3
 
-#define TO_LOWERCASE  1
+#define TO_LOWER_CASE  1
 #define TO_UNSIGNED   2
 
 #define USE_GETLINE 0
