@@ -1,11 +1,11 @@
 #include "shell.h"
 /**
- * **get_environ - return copy of environ
+ * **get_environment - return copy of environ
  * @info: struct
  *
  * Return: 0 always
  **/
-char **get_environ(info_t *info)
+char **get_environment(info_t *info)
 {
 	if (!info->environ || info->env_changed)
 	{
@@ -23,7 +23,7 @@ char **get_environ(info_t *info)
  **/
 int _unsetenv(info_t *info, char *var)
 {
-	list_t *node = info->env;
+	list_t *node = info->environment;
 	size_t j = 0;
 	char *q;
 
@@ -31,18 +31,18 @@ int _unsetenv(info_t *info, char *var)
 		return (0);
 	while (node)
 	{
-		q = starts_with(node->str, var);
+		q = _startswith(node->str, var);
 		if (q && *q == '=')
 		{
-			info->env_changed = delete_node_at_index(&(info->env), j);
+			info->environment_changed = delete_stringindex(&(info->environment), j);
 			j = 0;
-			node = info->env;
+			node = info->environment;
 			continue;
 		}
 		node = node->next;
 		j++;
 	}
-	return (info->env_changed);
+	return (info->environment_changed);
 }
 /**
  * _setenv - initialize env var
@@ -66,21 +66,21 @@ int _setenv(info_t *info, char *var, char *value)
 	_strcpy(buffer, var);
 	_strcat(buffer, "=");
 	_strcat(buffer, value);
-	node = info->env;
+	node = info->environment;
 	while (node)
 	{
-		q = starts_with(node->str, var);
+		q = _startswith(node->text, var);
 		if (q && *q == '=')
 		{
-			free(node->str);
-			node->str = buffer;
-			info->env_changed = 1;
+			free(node->text);
+			node->text = buffer;
+			info->environment_changed = 1;
 			return (0);
 		}
 		node = node->next;
 	}
-	add_node_end(&(info->env), buffer, 0);
+	add_node_end(&(info->environment), buffer, 0);
 	free(buffer);
-	info->env_changed = 1;
+	info->environment_changed = 1;
 	return (0);
 }
