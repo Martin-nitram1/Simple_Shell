@@ -38,7 +38,7 @@ int hsh(info_t *info, char **av)
 	{
 		if (info->err_num == -1)
 			exit(info->status);
-		exit (info->err_num);
+		exit(info->err_num);
 	}
 	return (build);
 }
@@ -53,7 +53,7 @@ int find_builtin(info_t *info)
 {
 	int i, built_in = -1;
 	builtin_table builtintbl[] = {
-		{"exits", _myexit},
+		{"exit", _myexit},
 		{"env", _myenv},
 		{"help", _myhelp},
 		{"history", _myhistory},
@@ -66,8 +66,12 @@ int find_builtin(info_t *info)
 
 	for (i = 0; builtintbl[i].type; i++)
 	{
-		info->line_count++;
-		built_in = builtintbl[i].func(info);
+		if (_strcmp(ifno->argv[0], builtintbl[i].type) == 0)
+		{
+			info->line_count++;
+			built_in = builtintbl[i].func(info);
+			break;
+		}
 	}
 	return (built_in);
 }
@@ -80,7 +84,6 @@ int find_builtin(info_t *info)
 void find_cmd(info_t *info)
 {
 	char *path = NULL;
-	char **token = NULL;
 	int i, k;
 
 	info->path = info->argv[0];
@@ -102,18 +105,13 @@ void find_cmd(info_t *info)
 	}
 	else
 	{
-		*token = _strtow(info->arg, " \t\n");
-
-		if (token)
-		{
-			info->argv = token;
+		if ((interactive(info) || _getenv(info, "PATH=")
+			|| info->argv[0][0] == '/') && is_cmd(info-arv[0]))
 			fork_cmd(info);
-			ffree(token);
-		}
-		else
+		else if (*(info->arg) != '\n')
 		{
-			info ->status = 1;
-			print_error(info, "Error in command\n");
+			info->status = 127;
+			print_error(info, "not found\n");
 		}
 	}
 }
@@ -126,7 +124,6 @@ void find_cmd(info_t *info)
 void fork_cmd(info_t *info)
 {
 	pid_t child_pid;
-	int status;
 
 	child_pid = fork();
 	if (child_pid == -1)
@@ -146,10 +143,10 @@ void fork_cmd(info_t *info)
 	}
 	else
 	{
-		waitpid(child_pid, &status, 0);
-		if (WIFEXITED(status))
+		wait(&(info->status));
+		if (WIFEXITED(info->status))
 		{
-			info->status = WEXITSTATUS(status);
+			info->status = WEXITSTATUS(info->status);
 			if (info->status == 126)
 				print_error(info, "Permission denied\n");
 		}
