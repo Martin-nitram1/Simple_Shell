@@ -1,39 +1,39 @@
 #include "shell.h"
 
 /**
- * _myexit - exit the shell
+ * exit_command - exit the shell
  * @info: param
  *
  * Return: exit with exit status
  **/
-int _myexit(info_t *info)
+int exit_command(info_t *info)
 {
 	int exit;
 
-	if (info->argv[1])
+	if (info->argument_vector[1])
 	{
-		exit = _erratoi(info->argv[1]);
+		exit = _eatoi(info->argument_vectorv[1]);
 		if (exit == -1)
 		{
 			info->status = 2;
-			print_error(info, "wrong! ");
+			_error(info, "wrong! ");
 		       _eputs(info->argv[1]);
 		       _eputchar('\n');
 			return (1);
 		}
-		info->err_num = _erratoi(info->argv[1]);
+		info->err_num = _eatoi(info->argv[1]);
 		return (-2);
 	}
-	info->err_num = -1;
+	info->error_number = -1;
 	return (-2);
 }
 /**
- * _mycd - change current dir
+ * _cd - change current dir
  * @info: param
  *
  * Return: 0 always
  **/
-int _mycd(info_t *info)
+int _cd(info_t *info)
 {
 	char *i, *direct, buffer[1024];
 	int _chdir;
@@ -43,7 +43,7 @@ int _mycd(info_t *info)
 	{
 		return (1);
 	}
-	if (!info->argv[1])
+	if (!info->argument_vector[1])
 	{
 		direct = _getenv(info, "HOME=");
 		if (!direct)
@@ -51,7 +51,7 @@ int _mycd(info_t *info)
 		else
 			_chdir = chdir(direct);
 	}
-	else if (_strcmp(info->argv[1], "-") == 0)
+	else if (_strcmp(info->argument_vector[1], "-") == 0)
 	{
 		if (!_getenv(info, "OLDPWD="))
 		{
@@ -63,10 +63,10 @@ int _mycd(info_t *info)
 		_chdir = chdir((direct = _getenv(info, "OLDPWD=")) ? direct : "/");
 	}
 	else
-		_chdir = chdir(info->argv[1]);
+		_chdir = chdir(info->argument_vector[1]);
 	if (_chdir == -1)
 	{
-		print_error(info, "cant move to");
+		_error(info, "cant move to");
 		_eputs(info->argv[1]), _eputchar('\n');
 	}
 	else
@@ -77,16 +77,16 @@ int _mycd(info_t *info)
 	return (0);
 }
 /**
- * _myhelp - change dir
+ * display_help - change dir
  * @info: param
  *
  * Return: 0 always
  **/
-int _myhelp(info_t *info)
+int display_help(info_t *info)
 {
 	char **args;
 
-	args = info->argv;
+	args = info->argument_vector;
 	_puts("function not set\n");
 	if (0)
 		_puts(*args);
