@@ -12,13 +12,13 @@ int display_envcmd(info_t *info)
 	return (0);
 }
 /**
- * get_environ - gets value of env var
+ * _getenv - gets value of env var
  * @info: param
  * @name: var env
  *
  * Return: value
  **/
-char *get_environ(info_t *info, const char *name)
+char *_getenv(info_t *info, const char *name)
 {
 	list_t *node = info->environment;
 	char *c;
