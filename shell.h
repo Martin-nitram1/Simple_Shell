@@ -81,7 +81,7 @@ typedef struct passinfo
 	list_t *command_history;
 	list_t *command_alias;
 	char **custom_environ;
-	int env_changed;
+	int environment_changed;
 	int execution_status;
 	char **buffer_pointer;
 	int buffer_type;
