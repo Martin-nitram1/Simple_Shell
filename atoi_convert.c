@@ -39,13 +39,13 @@ int _isalpha(int c)
 		return (0);
 }
 /**
- * _erratoi - convert string to integer
+ * _atoi - convert string to integer
  * @s: string to convert
  *
  * Return: 0 if no num in string, otherwise
  * converted number
  **/
-int _erratoi(char *s)
+int _atoi(char *s)
 {
 	int m, sig = 1, wave = 0, out;
 	unsigned int res = 0;
