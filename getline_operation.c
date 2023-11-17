@@ -18,7 +18,7 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
 		free(*buf);
 		*buf = NULL;
 		signal(SIGINT, sigintHandler);
-#if USE_GETLINE
+#if USE_GETLINE_FLAG
 		r = getline(buf, &len_p, stdin);
 #else
 		r = _getline(info, buf, &len_p);
@@ -30,9 +30,9 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
 				(*buf)[r - 1] = '\0';
 				r--;
 			}
-			info->linecount_flag = 1;
-			remove_comments(*buf);
-			build_history_list(info, *buf, info->histcount++);
+			info->linenum_flag = 1;
+			remove_comlines(*buf);
+			build_hist(info, *buf, info->history_count++);
 		}
 	}
 	return (r);
@@ -43,14 +43,14 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
  *
  * Return: bytes read
  **/
-ssize_t get_input(info_t *info)
+ssize_t read_input(info_t *info)
 {
 	static char *buf;
 	static size_t i, j, len;
 	ssize_t r = 0;
-	char **buf_p = &(info->arg), *p = NULL;
+	char **buf_p = &(info->argument), *p = NULL;
 
-	_putchar(BUF_FLUSH);
+	_putchar(FLUSH_BUFFER);
 	r = input_buf(info, &buf, &len);
 	if (r == -1)
 		return (-1);
@@ -59,10 +59,10 @@ ssize_t get_input(info_t *info)
 		j = i;
 		p = buf + i;
 
-		check_chain(info, buf, &j, i, len);
+		check_command(info, buf, &j, i, len);
 		while (j < len)
 		{
-			if (is_chain(info, buf, &j))
+			if (command_chain(info, buf, &j))
 				break;
 			j++;
 		}
@@ -70,7 +70,7 @@ ssize_t get_input(info_t *info)
 		if (i >= len)
 		{
 			i = len = 0;
-			info->cmd_buf_type = CMD_NORM;
+			info->buffer_type = COMMAND_NORMAL;
 		}
 		*buf_p = buf;
 		return (_strlen(p));
@@ -92,7 +92,7 @@ ssize_t read_buf(info_t *info, char *buf, size_t *i)
 
 	if (*i)
 		return (0);
-	rs = read(info->readfd, buf, READ_BUF_SIZE);
+	rs = read(info->read_file, buf, BUFFER_SIZE_READ);
 	if (rs >= 0)
 		*i = rs;
 	return (rs);
@@ -107,7 +107,7 @@ ssize_t read_buf(info_t *info, char *buf, size_t *i)
  **/
 int _getline(info_t *info, char **ptr, size_t *length)
 {
-	static char buf[READ_BUF_SIZE];
+	static char buf[BUFFER_SIZE_READ];
 	static size_t iq, len;
 	size_t k;
 	ssize_t rs = 0, s = 0;
@@ -150,5 +150,5 @@ void sigintHandler(__attribute__((unused))int sig_num)
 {
 	_puts("\n");
 	_puts("$ ");
-	_putchar(BUF_FLUSH);
+	_putchar(FLUSH_BUFFER);
 }
