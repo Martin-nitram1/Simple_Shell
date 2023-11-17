@@ -1,31 +1,31 @@
 #include "shell.h"
 
 /**
- * _myenv - print env
+ * display_envcmd - print env
  * @info: param
  *
  * Return: 0 always
  **/
-int _myenv(info_t *info)
+int display_envcmd(info_t *info)
 {
-	print_list_str(info->env);
+	print_string(info->environment);
 	return (0);
 }
 /**
- * _getenv - gets value of env var
+ * get_environ - gets value of env var
  * @info: param
  * @name: var env
  *
  * Return: value
  **/
-char *_getenv(info_t *info, const char *name)
+char *get_environ(info_t *info, const char *name)
 {
-	list_t *node = info->env;
+	list_t *node = info->environment;
 	char *c;
 
 	while (node)
 	{
-		c = starts_with(node->str, name);
+		c = _startwith(node->text, name);
 		if (c && *c)
 			return (c);
 		node = node->next;
@@ -33,54 +33,54 @@ char *_getenv(info_t *info, const char *name)
 	return (NULL);
 }
 /**
- * _mysetenv - initialize env var
+ * set_environ - initialize env var
  * @info: param
  *
  * Return: 0 always
  **/
-int _mysetenv(info_t *info)
+int set_environ(info_t *info)
 {
-	if (info->argc != 3)
+	if (info->argument_count != 3)
 	{
 		_eputs("Incorrect arguments\n");
 		return (1);
 	}
-	if (_setenv(info, info->argv[1], info->argv[2]))
+	if (_setenv(info, info->argument_vector[1], info->argument_vector[2]))
 		return (0);
 	return (1);
 }
 /**
- * _myunsetenv - remove env var
+ * unset_environ - remove env var
  * @info: param
  *
  * Return: 0 always
  **/
-int _myunsetenv(info_t *info)
+int unset_environ(info_t *info)
 {
 	int j;
 
-	if (info->argc == 1)
+	if (info->argument_count == 1)
 	{
 		_eputs("insufficient arguments\n");
 		return (1);
 	}
-	for (j = 1; j < info->argc; j++)
-		_unsetenv(info, info->argv[j]);
+	for (j = 1; j < info->argument_count; j++)
+		_unsetenv(info, info->argument_vector[j]);
 	return (0);
 }
 /**
- * populate_env_list - populate list
+ * populate_environ - populate list
  * @info: param
  *
  * Return: 0 always
  **/
-int populate_env_list(info_t *info)
+int populate_environ(info_t *info)
 {
 	list_t *node = NULL;
 	size_t j;
 
 	for (j = 0; environ[j]; j++)
-		add_node_end(&node, environ[j], 0);
-	info->env = node;
+		string_end(&node, environ[j], 0);
+	info->environment = node;
 	return (0);
 }
