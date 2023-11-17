@@ -9,7 +9,7 @@
  **/
 int main(int ac, char **av)
 {
-	info_t info[] = { INFO_INIT };
+	info_t info[] = { INFO_INITIALIZER };
 	int fd = 2;
 
 	fd = fd + 3;
@@ -27,15 +27,15 @@ int main(int ac, char **av)
 				_eputs("failed!");
 				_eputs(av[1]);
 				_eputchar('\n');
-				_eputchar(BUF_FLUSH);
+				_eputchar(FLUSH_BUFFER);
 				exit(127);
 			}
 			return (EXIT_FAILURE);
 		}
-		info->readfd = fd;
+		info->read_file = fd;
 	}
-	populate_env_list(info);
-	read_history(info);
-	hsh(info, av);
+	populate_environ(info);
+	read_hist(info);
+	custom_shell(info, av);
 	return (EXIT_SUCCESS);
 }
