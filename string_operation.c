@@ -39,7 +39,7 @@ int _strcmp(char *s1, char *s2)
 		return (*s1 < *s2 ? -1 : 1);
 }
 /**
- * starts_with - check if needle starts with haystack
+ * _startwith - check if needle starts with haystack
  * @haystack: string to search
  * @needle: substring to fin
  *
