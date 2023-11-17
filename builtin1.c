@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
- * display_history - display hist list
+ * _myhistory - display hist list
  * @info: param
  *
  * Return: 0 always
  **/
-int display_history(info_t *info)
+int _myhistory(info_t *info)
 {
 	print_list(info->history);
 	return (0);
@@ -76,12 +76,12 @@ int print_alias(list_t *node)
 	return (1);
 }
 /**
- * _alias - alias built in clone
+ * _myalias - alias built in clone
  * @info: param
  *
  * Return: 0 always
  **/
-int _alias(info_t *info)
+int _myalias(info_t *info)
 {
 	int j = 0;
 	char *c = NULL;
