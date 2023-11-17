@@ -11,7 +11,7 @@ int is_cmd(info_t *info, char *path)
 {
 	struct stat star;
 	(void)info;
-	
+
 	if (!path || stat(path, &star))
 		return (0);
 
