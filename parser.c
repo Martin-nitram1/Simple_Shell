@@ -55,7 +55,7 @@ char *find_cmdpath(info_t *info, char *pathstr, char *cmd)
 
 	if (!pathstr)
 		return (NULL);
-	if ((_strlen(cmd) > 2) && _startswith(cmd, "./"))
+	if ((_strlen(cmd) > 2) && _startwith(cmd, "./"))
 	{
 		if (is_validcmd(info, cmd))
 			return (cmd);
