@@ -9,7 +9,7 @@
  **/
 int main(int ac, char **av)
 {
-	info_t info[] = { INFO_INITIALIZER };
+	info_t info[] = { COMMAND_INFO_INITIALIZER };
 	int fd = 2;
 
 	fd = fd + 3;
