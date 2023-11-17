@@ -13,23 +13,23 @@ int hsh(info_t *info, char **av)
 	int build = 0;
 
 	while (r != -1 && build != -2)
+	{
+		clear_info(info);
+		if (interactive(info))
+			_puts("$ ");
+		_eputchar(BUF_FLUSH);
+		r = get_input(info);
+		if (r != -1)
 		{
-			clear_info(info);
-			if (interactive(info))
-				_puts("$ ");
-			_eputchar(BUF_FLUSH);
-			r = get_input(info);
-			if (r != -1)
-			{
-				set_info(info, av);
-				build = find_builtin(info);
-				if (build == -1)
-					find_cmd(info);
-			}
-			else if (interactive(info))
-				_putchar('\n');
-			free_info(info, 0);
+			set_info(info, av);
+			build = find_builtin(info);
+			if (build == -1)
+				find_cmd(info);
 		}
+		else if (interactive(info))
+			_putchar('\n');
+		free_info(info, 0);
+	}
 	write_history(info);
 	free_info(info, 1);
 	if (!interactive(info) && info->status)
