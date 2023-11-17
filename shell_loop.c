@@ -66,7 +66,7 @@ int find_builtin(info_t *info)
 
 	for (i = 0; builtintbl[i].type; i++)
 	{
-		if (_strcmp(ifno->argv[0], builtintbl[i].type) == 0)
+		if (_strcmp(info->argv[0], builtintbl[i].type) == 0)
 		{
 			info->line_count++;
 			built_in = builtintbl[i].func(info);
@@ -106,7 +106,7 @@ void find_cmd(info_t *info)
 	else
 	{
 		if ((interactive(info) || _getenv(info, "PATH=")
-			|| info->argv[0][0] == '/') && is_cmd(info-arv[0]))
+			|| info->argv[0][0] == '/') && is_cmd(info-argv[0]))
 			fork_cmd(info);
 		else if (*(info->arg) != '\n')
 		{
@@ -138,7 +138,7 @@ void fork_cmd(info_t *info)
 			free_info(info, 1);
 			if (errno == EACCES)
 				exit(126);
-			_myexit(1);
+			exit(1);
 		}
 	}
 	else
