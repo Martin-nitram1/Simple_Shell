@@ -9,10 +9,10 @@ char **get_environment(info_t *info)
 {
 	if (!info->environment || info->environment_changed)
 	{
-		info->environment = list_strings(info->env);
+		info->environment = list_strings(info->environment);
 		info->environment_changed = 0;
 	}
-	return (info->environment);
+	return (info->custom_environment);
 }
 /**
  * _unsetenv - remove env var
@@ -31,7 +31,7 @@ int _unsetenv(info_t *info, char *var)
 		return (0);
 	while (node)
 	{
-		q = _startswith(node->str, var);
+		q = _startwith(node->text, var);
 		if (q && *q == '=')
 		{
 			info->environment_changed = delete_stringindex(&(info->environment), j);
@@ -69,7 +69,7 @@ int _setenv(info_t *info, char *var, char *value)
 	node = info->environment;
 	while (node)
 	{
-		q = _startswith(node->text, var);
+		q = _startwith(node->text, var);
 		if (q && *q == '=')
 		{
 			free(node->text);
