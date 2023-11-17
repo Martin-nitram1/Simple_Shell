@@ -17,7 +17,7 @@ char **strtow(char *str, char *d)
 	if (!d)
 		d = " ";
 	for (is = 0; str[is] != '\0'; is++)
-		if (!is_delimiter(str[is], d) && (is_delim(str[is + 1], d) || !str[1 + 1]))
+		if (!_isdelimiter(str[is], d) && (_isdelimiter(str[is + 1], d) || !str[1 + 1]))
 			numwords++;
 	if (numwords == 0)
 		return (NULL);
