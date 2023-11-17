@@ -31,7 +31,7 @@ int _eputchar(char c)
 	static int j;
 	static char buf[BUFFER_SIZE_WRITE];
 
-	if (c == FLUSH_BUFFER || j >= BUFFER_WRITE_SIZE)
+	if (c == FLUSH_BUFFER || j >= BUFFER_SIZE_WRITE)
 	{
 		write(2, buf, j);
 		j = 0;
