@@ -26,10 +26,10 @@ char **strtow(char *str, char *d)
 		return (NULL);
 	for (is = 0, jk = 0; jk < numwords; jk++)
 	{
-		while (is_delim(str[is], d))
+		while (_isdelimiter(str[is], d))
 			is++;
 		k = 0;
-		while (!is_delim(str[is + k], d) && str[is + k])
+		while (!_isdelimiter(str[is + k], d) && str[is + k])
 			k++;
 		s[jk] = malloc((k + 1) * sizeof(char));
 		if (!s[jk])
