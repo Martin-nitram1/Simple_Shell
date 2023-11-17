@@ -1,12 +1,12 @@
 #include "shell.h"
 
 /**
- * _erratoi - convert string to int
+ * _eatoi - convert string to int
  * @s: string convert
  *
  * Return:  0 if success -1 if error
  **/
-int _erratoi(char *s)
+int _eatoi(char *s)
 {
 	int f = 0;
 	unsigned long int res = 0;
@@ -34,24 +34,24 @@ int _erratoi(char *s)
  *
  * Return: void
  **/
-void print_error(info_t *info, char *estr)
+void _error(info_t *info, char *estr)
 {
-	_eputs(info->fname);
+	_eputs(info->file_name);
 	_eputs(": ");
-	print_d(info->line_count, STDERR_FILENO);
+	print_d(info->line_number, STDERR_FILENO);
 	_eputs(": ");
-	_eputs(info->argv[0]);
+	_eputs(info->argument_vector[0]);
 	_eputs(": ");
 	_eputs(estr);
 }
 /**
- * print_d - prints decimal
+ * printd - prints decimal
  * @input: the input
  * @fd: file descriptor
  *
  * Return: nums of chars
  **/
-int print_d(int input, int fd)
+int printd(int input, int fd)
 {
 	int (*__putchar)(char) = _putchar;
 	int e, count = 0;
@@ -82,14 +82,14 @@ int print_d(int input, int fd)
 	return (count);
 }
 /**
- * *convert_number - convert
+ * *convert_to_string - convert
  * @num: number
  * @base: base
  * @flags: arg flag
  *
  * Return: string
  **/
-char *convert_number(long int num, int base, int flags)
+char *convert_to_string(long int num, int base, int flags)
 {
 	static char *ray;
 	static char buffer[50];
@@ -97,12 +97,12 @@ char *convert_number(long int num, int base, int flags)
 	char *ptr;
 	unsigned long i = num;
 
-	if (!(flags & CONVERT_UNSIGNED) && num < 0)
+	if (!(flags & TO_UNSIGNED) && num < 0)
 	{
 		i = -num;
 		sig = '-';
 	}
-	ray = flags & CONVERT_LOWERCASE ? "0123456789abcdef" : "0123456789ABCDEF";
+	ray = flags & TO_LOWER_CASE ? "0123456789abcdef" : "0123456789ABCDEF";
 	ptr = &buffer[49];
 	*ptr = '\0';
 	while (i != 0)
@@ -115,12 +115,12 @@ char *convert_number(long int num, int base, int flags)
 	return (ptr);
 }
 /**
- * remove_comments - replace '#' with '\0'
+ * remove_comlines - replace '#' with '\0'
  * @buf: address of string to checck
  *
  * Return: 0 always
  **/
-void remove_comments(char *buf)
+void remove_comlines(char *buf)
 {
 	int j;
 
