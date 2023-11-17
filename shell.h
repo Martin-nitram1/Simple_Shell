@@ -100,7 +100,7 @@ typedef struct passinfo
  **/
 typedef struct builtin_command
 {
-	char *command_type;
+	char *type;
 	int (*func)(info_t *);
 } builtin_commands;
 
