@@ -48,7 +48,7 @@ ssize_t get_input(info_t *info)
 	static char *buf;
 	static size_t i, j, len;
 	ssize_t r = 0;
-	char **buf_p = &(info-arg), *p;
+	char **buf_p = &(info->arg), *p;
 
 	_putchar(BUF_FLUSH);
 	r = input_buf(info, &buf, &len);
@@ -59,7 +59,7 @@ ssize_t get_input(info_t *info)
 		j = i;
 		p = buf + i;
 
-		chec_chain(info, buf, &j, i, len);
+		check_chain(info, buf, &j, i, len);
 		while (j < len)
 			{
 				if (is_chain(info, buf, &j))
