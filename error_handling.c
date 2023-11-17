@@ -14,10 +14,10 @@ void _eputs(char *str)
 		return;
 
 	while (str[j] != '\0')
-		{
-			_eputchar(str[j]);
-			j++;
-		}
+	{
+		_eputchar(str[j]);
+		j++;
+	}
 }
 /**
  * _eputchar - writes char to stderr
@@ -76,8 +76,8 @@ int _putsfd(char *str, int fd)
 		return (0);
 
 	while (*str)
-		{
-			j += _putfd(*str++, fd);
-		}
+	{
+		j += _putfd(*str++, fd);
+	}
 	return (j);
 }
