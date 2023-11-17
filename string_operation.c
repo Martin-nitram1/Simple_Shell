@@ -45,7 +45,7 @@ int _strcmp(char *s1, char *s2)
  *
  * Return: address of next char of strig or NULL
  **/
-char *starts_with(const char *haystack, const char *needle)
+char *_startwith(const char *haystack, const char *needle)
 {
 	while (*needle)
 		if (*needle++ != *haystack++)
