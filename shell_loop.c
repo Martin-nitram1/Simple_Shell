@@ -43,13 +43,13 @@ int custom_shell(info_t *info, char **av)
 	return (build);
 }
 /**
- * identify_built_in - finds builtin command
+ * identify_builtin - finds builtin command
  * @info: param
  *
  * Return: -1 if not found, 0 if executed success,
  * 1 if found but not executed, -2 if signal exits
  **/
-int identify_built_in(info_t *info)
+int identify_builtin(info_t *info)
 {
 	int i, built_in = -1;
 	builtin_commands builtincmd[] = {
