@@ -1,22 +1,22 @@
 #include "shell.h"
 /**
- * interactive - check if in interactrive mode
+ * interactive_mode - check if in interactrive mode
  * @info: param
  *
  * Return: 1 if true otherwise 0
  **/
-int interactive(info_t *info)
+int interactive_mode(info_t *info)
 {
-	return (isatty(STDIN_FILENO) && info->readfd == 0);
+	return (isatty(STDIN_FILENO) && info->readfile == 0);
 }
 /**
- * is_delim - check if delimiter
+ * is_delimiter - check if delimiter
  * @c: char to check
  * @delim: delim string
  *
  * Return: 1 if true 0 if false
  **/
-int is_delim(char c, char *delim)
+int is_delimiter(char c, char *delim)
 {
 	while (*delim)
 		{
@@ -26,12 +26,12 @@ int is_delim(char c, char *delim)
 	return (0);
 }
 /**
- * _isalpha - is alphanumeric?
+ * _isalphabetic - is alphanumeric?
  * @c: char to check
  *
  * Return: 1 if true, 0 otherwise
  **/
-int _isalpha(int c)
+int _isalphabetic(int c)
 {
 	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
 		return (1);
