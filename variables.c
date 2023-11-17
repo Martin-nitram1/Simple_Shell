@@ -56,7 +56,15 @@ void check_chain(info_t *info, char *buf, size_t *p, size_t i, size_t len)
 			jt = len;
 		}
 	}
-	*p = jt;
+	if (info->cmd_buf_type == CMD_OR)
+	{
+		if (!info->status)
+		{
+			buf[i] = 0;
+			j = len;
+		}
+	}
+	*p = j;
 }
 /**
  * replace_alias - replace alias in tokenized string
@@ -116,7 +124,8 @@ int replace_vars(info_t *info)
 		node = node_starts_with(info->env, &info->argv[iq][1], '=');
 		if (node)
 		{
-			replace_string(&(info->argv[iq]), _strdup(_strchr(node->str, '=') + 1));
+			replace_string(&(info->argv[iq]),
+				_strdup(_strchr(node->str, '=') + 1));
 			continue;
 		}
 		replace_string(&info->argv[iq], _strdup(""));
