@@ -107,7 +107,7 @@ typedef struct builtin_command
 /*toem_shloop.c*/
 int custom_shell(info_t *, char **);
 int identify_builtin(info_t *);
-void find_commandmd(info_t *);
+void find_command(info_t *);
 void fork_command(info_t *);
 
 /*parser.c*/
