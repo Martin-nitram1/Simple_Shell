@@ -48,7 +48,7 @@ ssize_t get_input(info_t *info)
 	static char *buf;
 	static size_t i, j, len;
 	ssize_t r = 0;
-	char **buf_p = &(info->arg), *p;
+	char **buf_p = &(info->arg), *p = NULL;
 
 	_putchar(BUF_FLUSH);
 	r = input_buf(info, &buf, &len);
@@ -73,8 +73,10 @@ ssize_t get_input(info_t *info)
 			info->cmd_buf_type = CMD_NORM;
 		}
 		*buf_p = buf;
-		return (r);
+		return (_strlen(p));
 	}
+	buf_p = buf;
+	return (r);
 }
 /**
  * read_buf - read buffer
