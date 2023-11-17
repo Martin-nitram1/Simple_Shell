@@ -180,7 +180,7 @@ void free_command(info_t *, int);
 
 /*environ.c*/
 char *_getenv(info_t *, const char *);
-int display_env(info_t *);
+int display_envcmd(info_t *);
 int set_environ(info_t *);
 int unset_environ(info_t *);
 int populate_environ(info_t *);
@@ -218,7 +218,7 @@ int replace_commandalias(info_t *);
 int replace_commandvariables(info_t *);
 int replace_substring(char **, char *);
 
-int display_history(info_t *);
+int displayhistory(info_t *);
 int myalias(info_t *);
 int unsetalias(info_t *, char *);
 int setalias(info_t *, char *);
