@@ -70,14 +70,14 @@ void _puts(char *str)
 int _putchar(char c)
 {
 	static int iq;
-	static char buf[WRITE_BUF_SIZE];
+	static char buf[BUFFER_SIZE_WRITE];
 
-	if (c == BUF_FLUSH || iq >= WRITE_BUF_SIZE)
+	if (c == FLUSH_BUFFER || iq >= BUFFER_SIZE_WRITE)
 	{
 		write(1, buf, iq);
 		iq = 0;
 	}
-	if (c != BUF_FLUSH)
+	if (c != FLUSH_BUFFER)
 		buf[iq++] = c;
 	return (1);
 }
