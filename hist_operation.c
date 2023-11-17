@@ -55,7 +55,7 @@ int write_hist(info_t *info)
  *
  * Return: histcount on success 0 otherwise
  **/
-int read_history(info_t *info)
+int read_hist(info_t *info)
 {
 	int iq, last = 0, line_count = 0;
 	ssize_t fd, rd_len, fsize = 0;
