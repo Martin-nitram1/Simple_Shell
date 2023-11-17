@@ -7,7 +7,7 @@
  **/
 int interactive_mode(info_t *info)
 {
-	return (isatty(STDIN_FILENO) && info->readfile == 0);
+	return (isatty(STDIN_FILENO) && info->read_file == 0);
 }
 /**
  * is_delim - check if delimiter
