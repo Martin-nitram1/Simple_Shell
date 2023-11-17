@@ -179,7 +179,7 @@ void set_command(info_t *, char **);
 void free_command(info_t *, int);
 
 /*environ.c*/
-char *get_environ(info_t *, const char *);
+char *_getenv(info_t *, const char *);
 int display_env(info_t *);
 int set_environ(info_t *);
 int unset_environ(info_t *);
