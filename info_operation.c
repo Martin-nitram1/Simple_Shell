@@ -42,7 +42,7 @@ void set_command(info_t *info, char **av)
 			;
 		info->argument_count = i;
 		replace_commandalias(info);
-		replace_commandvars(info);
+		replace_commandvariables(info);
 	}
 }
 /**
@@ -54,7 +54,7 @@ void set_command(info_t *info, char **av)
  **/
 void free_command(info_t *info, int all)
 {
-	ffree(info->argument_vector);
+	free_alloc(info->argument_vector);
 	info->argument_vector = NULL;
 	info->command_path = NULL;
 	if (all)
@@ -62,13 +62,13 @@ void free_command(info_t *info, int all)
 		if (!info->buffer_pointer)
 			free(info->argument);
 		if (info->environment)
-			free_list(&(info->environment));
+			_freestring(&(info->environment));
 		if (info->command_history)
-			free_list(&(info->command_history));
+			_freestring(&(info->command_history));
 		if (info->command_alias)
-			free_list(&(info->command_alias));
-		ffree(info->environ);
-			info->environ = NULL;
+			_freestring(&(info->command_alias));
+		free_alloc(info->environment);
+			info->environment = NULL;
 		bfree((void **)info->buffer_pointer);
 		if (info->read_file > 2)
 			close(info->read_file);
