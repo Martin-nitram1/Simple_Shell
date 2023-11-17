@@ -92,7 +92,7 @@ int read_history(info_t *info)
 		build_hist(info, buf + last, line_count++);
 	free(buf);
 	info->history_count = line_count;
-	while (info->history_count-- >= MAX_HISTORY_ENTRIES)
+	while (info->history_count-- >= HIST_MAX)
 		delete_stringindex(&(info->command_history), 0);
 	renum_hist(info);
 	return (info->history_count);
