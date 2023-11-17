@@ -1,6 +1,5 @@
 #include "shell.h"
 
-static char buf[WRITE_BUF_SIZE];
 /**
  * _strcpy - copy string
  * @dest: destinatin
