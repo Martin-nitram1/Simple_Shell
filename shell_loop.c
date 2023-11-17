@@ -106,7 +106,8 @@ void find_command(info_t *info)
 	else
 	{
 		if ((interactive_mode(info) || _getenv(info, "PATH=")
-			|| info->argument_vector[0][0] == '/') && is_validcmd(info, info->argument_vector[0]))
+			|| info->argument_vector[0][0] == '/') &&
+			is_validcmd(info, info->argument_vector[0]))
 			fork_command(info);
 		else if (*(info->argument) != '\n')
 		{
@@ -133,7 +134,8 @@ void fork_command(info_t *info)
 	}
 	if (child_pid == 0)
 	{
-		if (execve(info->command_path, info->argument_vector, get_environment(info)) == -1)
+		if (execve(info->command_path, info->argument_vector,
+			get_environment(info)) == -1)
 		{
 			free_command(info, 1);
 			if (errno == EACCES)
