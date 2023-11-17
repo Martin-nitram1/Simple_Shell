@@ -222,6 +222,6 @@ int display_history(info_t *);
 int myalias(info_t *);
 int unsetalias(info_t *, char *);
 int setalias(info_t *, char *);
-int printalias(list *)
+int printalias(list_t *);
 
 #endif /*SHELL.H*/
