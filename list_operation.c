@@ -72,7 +72,7 @@ list_t *string_end(list_t **head, const char *str, int num)
 	return (newnode);
 }
 /**
- * print_list_str - print str elements
+ * print_string - print str elements
  * @h: pointer to head
  *
  * Return: size of list
@@ -91,7 +91,7 @@ size_t print_string(const list_t *h)
 	return (iq);
 }
 /**
- * delete_node_at_index - delets node at index
+ * delete_stringindex - delets node at index
  * @head: head node
  * @index: index to check
  *
@@ -129,7 +129,7 @@ int delete_stringindex(list_t **head, unsigned int index)
 	return (0);
 }
 /**
- * free_list - frees all nodes
+ * _freestring - frees all nodes
  * @head_ptr: head node
  *
  * Return:  void
