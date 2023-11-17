@@ -105,7 +105,7 @@ ssize_t read_buf(info_t *info, char *buf, size_t *i)
  *
  * Return: r
  **/
-int _getline_input(info_t *info, char **ptr, size_t *length)
+int getline_input(info_t *info, char **ptr, size_t *length)
 {
 	static char buf[BUFFER_SIZE_READ];
 	static size_t iq, len;
