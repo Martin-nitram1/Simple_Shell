@@ -17,7 +17,7 @@ list_t *string_list(list_t **head, const char *str, int num)
 	newhead = malloc(sizeof(list_t));
 	if (!newhead)
 		return (NULL);
-	set_memoery((void *)newhead, 0, sizeof(list_t));
+	set_memory((void *)newhead, 0, sizeof(list_t));
 	newhead->number = num;
 	if (str)
 	{
