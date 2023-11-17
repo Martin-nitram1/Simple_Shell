@@ -7,12 +7,12 @@
  **/
 char **get_environment(info_t *info)
 {
-	if (!info->environ || info->env_changed)
+	if (!info->environment || info->environment_changed)
 	{
-		info->environ = list_to_strings(info->env);
-		info->env_changed = 0;
+		info->environment = list_strings(info->env);
+		info->environment_changed = 0;
 	}
-	return (info->environ);
+	return (info->environment);
 }
 /**
  * _unsetenv - remove env var
@@ -79,7 +79,7 @@ int _setenv(info_t *info, char *var, char *value)
 		}
 		node = node->next;
 	}
-	add_node_end(&(info->environment), buffer, 0);
+	string_end(&(info->environment), buffer, 0);
 	free(buffer);
 	info->environment_changed = 1;
 	return (0);
