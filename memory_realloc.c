@@ -40,15 +40,22 @@ void ffree(char **pp)
  * Return: pointer to memory allocd
  **/
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
-{
-	char *pa = NULL;
-	unsigned int i;
+{char *p;
 
-	pa = malloc(new_size);
-	if (!pa)
-		return (NULL);
-	for (i = 0; i < old_size; i++)
-		pa[i] = ((char *)ptr)[i];
-	free(ptr);
-	return (pa);
+ if (!ptr)
+	 return (malloc(new_size));
+ if (!new_size)
+	 return (free(ptr), NULL);
+ if (new_size == old_size)
+	 return (ptr);
+
+ p = malloc(new_size);
+ if (!p)
+	 return (NULL);
+
+ old_size = old_size < new_size ? old_size : new_size;
+ while (old_Size--)
+	 p[old_size] = ((char *)ptr)[old_size];
+ free(ptr);
+ return (p);
 }
