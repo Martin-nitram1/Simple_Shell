@@ -16,7 +16,7 @@ int interactive_mode(info_t *info)
  *
  * Return: 1 if true 0 if false
  **/
-int is_delim(char c, char *delim)
+int _isdelimiter(char c, char *delim)
 {
 	while (*delim)
 		{
