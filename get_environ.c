@@ -7,9 +7,9 @@
  **/
 char **get_environment(info_t *info)
 {
-	if (!info->environment || info->environment_changed)
+	if (!info->custom_environment || info->environment_changed)
 	{
-		info->environment = list_strings(info->environment);
+		info->custom_environment = list_strings(info->environment);
 		info->environment_changed = 0;
 	}
 	return (info->custom_environment);
