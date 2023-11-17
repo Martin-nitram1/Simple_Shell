@@ -87,7 +87,7 @@ list_t *find_nodeprefix(list_t *node, char *prefix, char c)
 
 	while (node)
 	{
-		ps = _startswith(node->text, prefix);
+		ps = _startwith(node->text, prefix);
 		if (ps && ((c == -1) || (*ps == c)))
 			return (node);
 		node = node->next;
