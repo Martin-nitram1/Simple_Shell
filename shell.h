@@ -46,7 +46,7 @@ typedef struct string_node
 } list_t;
 
 /*
- *struct passinfo - contains pseudo-arguements to pass into a function,
+ * struct passinfo - contains pseudo-arguements to pass into a function,
  *			allowing uniform prototype for function pointer struct
  *@argument: string from getline
  *@argument_vector: array of string
