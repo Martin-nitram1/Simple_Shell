@@ -38,7 +38,7 @@ void _error(info_t *info, char *estr)
 {
 	_eputs(info->file_name);
 	_eputs(": ");
-	print_d(info->line_number, STDERR_FILENO);
+	_printd(info->line_number, STDERR_FILENO);
 	_eputs(": ");
 	_eputs(info->argument_vector[0]);
 	_eputs(": ");
