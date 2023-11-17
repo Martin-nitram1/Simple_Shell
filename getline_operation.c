@@ -38,7 +38,7 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
 	return (r);
 }
 /**
- * get_input - get ine minus newline
+ * read_input - get ine minus newline
  * @info: param
  *
  * Return: bytes read
@@ -98,7 +98,7 @@ ssize_t read_buf(info_t *info, char *buf, size_t *i)
 	return (rs);
 }
 /**
- * _getline - get next line
+ * getline_input - get next line
  * @info: param
  * @ptr: ptr to buffer
  * @length: dsize of buff
