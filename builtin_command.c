@@ -12,16 +12,16 @@ int exit_command(info_t *info)
 
 	if (info->argument_vector[1])
 	{
-		exit = _eatoi(info->argument_vectorv[1]);
+		exit = _eatoi(info->argument_vector[1]);
 		if (exit == -1)
 		{
-			info->status = 2;
+			info->execution_status = 2;
 			_error(info, "wrong! ");
-		       _eputs(info->argv[1]);
+		       _eputs(info->argument_vector[1]);
 		       _eputchar('\n');
 			return (1);
 		}
-		info->err_num = _eatoi(info->argv[1]);
+		info->error_number = _eatoi(info->argument_vector[1]);
 		return (-2);
 	}
 	info->error_number = -1;
@@ -67,7 +67,7 @@ int _cd(info_t *info)
 	if (_chdir == -1)
 	{
 		_error(info, "cant move to");
-		_eputs(info->argv[1]), _eputchar('\n');
+		_eputs(info->argument_vector[1]), _eputchar('\n');
 	}
 	else
 	{
