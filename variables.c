@@ -117,11 +117,11 @@ int replace_commandvariables(info_t *info)
 		}
 		if (!strcmp(info->argument_vector[iq], "$$"))
 		{
-			replace_substring(&(info->argv[iq]),
+			replace_substring(&(info->argument_vector[iq]),
 					_strdup(convert_to_string(getpid(), 10, 0)));
 			continue;
 		}
-		node = find_nodeprefix(info->env, &info->argv[iq][1], '=');
+		node = find_nodeprefix(info->environment, &info->argument_vector[iq][1], '=');
 		if (node)
 		{
 			replace_substring(&(info->argument_vector[iq]),
