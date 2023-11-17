@@ -1,7 +1,7 @@
 #include "shell.h"
 
 /**
- * get_history_file - gets the history file
+ * get_hist - gets the history file
  * @info: param
  *
  * Return: allocated string
@@ -23,7 +23,7 @@ char *get_hist(info_t *info)
 	return (bufs);
 }
 /**
- * write_history - creates a file, or appends to an existing file
+ * write_hist - creates a file, or appends to an existing file
  * @info: param
  *
  * Return: 1 on success otherwise -1
@@ -50,7 +50,7 @@ int write_hist(info_t *info)
 	return (1);
 }
 /**
- * read_history - read from history file
+ * read_hist - read from history file
  * @info: param
  *
  * Return: histcount on success 0 otherwise
