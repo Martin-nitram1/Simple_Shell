@@ -7,7 +7,7 @@
  *
  * Return: pointer to string or NULL if failed
  **/
-char **strtow(char *str, char *d)
+char **_strtow(char *str, char *d)
 {
 	int is, jk, k, m, numwords = 0;
 	char **s;
