@@ -110,7 +110,8 @@ int getline_input(info_t *info, char **ptr, size_t *length)
 	static char buf[BUFFER_SIZE_READ];
 	static size_t iq, len;
 	size_t k;
-	ssize_t rs = 0, s = 0;
+	ssize_t rs = 0;
+	ssize_t s = 0;
 	char *p = NULL, *new_p = NULL, *c;
 
 	p = *ptr;
