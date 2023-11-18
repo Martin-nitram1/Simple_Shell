@@ -127,7 +127,7 @@ int getline_input(info_t *info, char **ptr, size_t *length)
 	k = c ? 1 + (unsigned int)(c - buf) : len;
 	new_p = _realloc(p, s, s ? s + k : k + 1);
 	if (!new_p)
-		return (p ? free(p), -1) -1);
+		return (p ? (free(p), -1) : -1);
 	if (s)
 		_strncat(new_p, buf + iq, k - iq);
 	else
