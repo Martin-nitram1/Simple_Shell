@@ -123,7 +123,7 @@ int getline_input(info_t *info, char **ptr, size_t *length)
 	if (rs == -1 || (rs == 0 && len == 1))
 		return (-1);
 	c = _strchr(buf + 1, '\n');
-	k = c ? 1 + (c - buf) : len;
+	k = c ? 1 + (unsigned int)(c - buf) : len;
 	new_p = _realloc(p, s, s ? s + k : k + 1);
 	if (!new_p)
 		return (p ? free(p), -1 : -1);
