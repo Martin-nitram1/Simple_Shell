@@ -28,7 +28,7 @@ void set_command(info_t *info, char **av)
 	info->file_name = av[0];
 	if (info->argument)
 	{
-		info->argument_vector = strtow(info->argument, " \t");
+		info->argument_vector = _strtow(info->argument, " \t");
 		if (!info->argument_vector)
 		{
 			info->argument_vector = malloc(sizeof(char *) * 2);
